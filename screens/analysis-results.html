@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analysis - Bill-ingual</title>
+<!-- Typography: Newsreader (Serif) & Inter (Sans) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#777777",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-fixed-variant": "#e2e2e2",
+                        "tertiary-fixed": "#5e5e5e",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eeeeee",
+                        "on-primary": "#e2e2e2",
+                        "primary-fixed": "#5e5e5e",
+                        "primary-fixed-dim": "#474747",
+                        "tertiary-container": "#747474",
+                        "surface-dim": "#dadada",
+                        "background": "#f9f9f9",
+                        "surface-container-low": "#f3f3f4",
+                        "tertiary-fixed-dim": "#474747",
+                        "secondary-container": "#d6d4d3",
+                        "outline-variant": "#c6c6c6",
+                        "on-primary-fixed-variant": "#e2e2e2",
+                        "on-error-container": "#410002",
+                        "on-surface-variant": "#474747",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-fixed": "#ffffff",
+                        "tertiary": "#3b3b3b",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-primary": "#c6c6c6",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-container": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "secondary-fixed": "#c8c6c6",
+                        "secondary-fixed-dim": "#acabab",
+                        "on-primary-container": "#ffffff",
+                        "surface-tint": "#5e5e5e",
+                        "on-tertiary": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2f3131",
+                        "surface-variant": "#e2e2e2",
+                        "primary": "#000000",
+                        "on-primary-fixed": "#ffffff",
+                        "primary-container": "#3b3b3b",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-container": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#3b3b3b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f9f9f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #1a1c1c;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .serif-italic {
+            font-family: 'Newsreader', serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-neutral-50/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-black/10 dark:border-white/10">
+<div class="text-xl font-bold tracking-tighter text-black dark:text-white font-serif italic">
+            Bill-ingual
+        </div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-black dark:text-white border-b-2 border-black dark:border-white pb-1 font-bold font-sans text-[10px] uppercase tracking-widest" href="#">Analysis</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors font-sans text-[10px] uppercase tracking-widest" href="#">History</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors font-sans text-[10px] uppercase tracking-widest" href="#">Archives</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 text-[10px] font-bold tracking-widest uppercase hover:bg-primary-container transition-all duration-200 ease-in-out active:scale-95">
+            NEW SCAN
+        </button>
+</header>
+<main class="pt-32 pb-24 px-8 max-w-7xl mx-auto">
+<!-- Hero: The Bottom Line -->
+<section class="mb-24 border-b border-black/5 pb-16">
+<p class="font-sans text-[10px] uppercase tracking-[0.3em] text-outline mb-8">THE BOTTOM LINE</p>
+<h1 class="serif-italic text-5xl md:text-7xl leading-[1.1] max-w-4xl tracking-tight">
+                "Your monthly payment is increasing by <span class="text-primary">$244.00</span> effective next billing cycle due to a shortfall in your escrow projections."
+            </h1>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+<!-- Left Column: Translation / Breakdown -->
+<div class="lg:col-span-7 space-y-16">
+<div>
+<h2 class="font-sans text-[10px] uppercase tracking-[0.3em] text-outline mb-10 border-b border-black/5 pb-2">TRANSLATION / BREAKDOWN</h2>
+<div class="space-y-12">
+<!-- Escrow Shortage Section -->
+<div class="group">
+<h3 class="font-sans font-bold text-sm tracking-widest uppercase mb-4">ESCROW SHORTAGE</h3>
+<div class="bg-surface-container-low p-8 border-l-4 border-primary">
+<p class="text-lg leading-relaxed font-light text-on-surface-variant">
+                                    Your property taxes rose higher than the bank predicted last year. This creates a <span class="font-semibold text-primary">"shortage"</span> because your account doesn't have enough to cover the upcoming tax bill. The bank is now collecting extra to catch up.
+                                </p>
+</div>
+</div>
+<!-- Adjusted Payment Section -->
+<div class="group">
+<h3 class="font-sans font-bold text-sm tracking-widest uppercase mb-4">ADJUSTED PAYMENT</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-surface-container-high p-8">
+<span class="block text-[10px] uppercase tracking-widest text-outline mb-2">Previous Payment</span>
+<span class="text-3xl font-bold tracking-tighter">$1,850.00</span>
+</div>
+<div class="bg-primary text-on-primary p-8 shadow-2xl">
+<span class="block text-[10px] uppercase tracking-widest text-on-primary/60 mb-2">New Payment</span>
+<span class="text-3xl font-bold tracking-tighter">$2,094.00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Abstract Visual Asset -->
+<div class="relative h-64 w-full bg-surface-container overflow-hidden">
+<img alt="Abstract financial architecture" class="w-full h-full object-cover grayscale opacity-40 mix-blend-multiply" data-alt="Minimalist architectural shadows and sharp geometric lines in high-contrast monochrome, dramatic light hitting a textured concrete surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ9scFR7ur3yW1NxDiky9ihQOhv2TiloBTOkuFRT5JC8T6Up4T-shxeTGcTeyVX4AJvV0v7w5X7V0qyb9m0RXkv-OaGsD4N5u4ZW-6tTYt0HE_NxXJnqCZjx365CYUOwIvycE5cqmxdYIB4FJOUCZVliUObxJsTig-JEpomFikaY5coiWioeFr8ZbNrABWvSvXFMHGhQQeKQzGgSlErQwYBG4rdpafkaNr_0uQwVNfomrGrDfzix2mn5Gl_YhZV-LZy7wwJ9Tmn0Q"/>
+<div class="absolute inset-0 flex items-center justify-center border border-black/5">
+<div class="bg-white/90 backdrop-blur p-6 text-center border border-black/5">
+<p class="serif-italic text-xl">The Architecture of Equity</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Recommended Actions -->
+<div class="lg:col-span-5">
+<div class="sticky top-32">
+<h2 class="font-sans text-[10px] uppercase tracking-[0.3em] text-outline mb-10 border-b border-black/5 pb-2">RECOMMENDED ACTIONS</h2>
+<div class="space-y-12">
+<!-- Action 01 -->
+<div class="flex gap-6">
+<span class="serif-italic text-4xl text-outline/30 leading-none">01</span>
+<div class="space-y-4 flex-1">
+<h4 class="font-bold tracking-tight text-xl uppercase italic">PAY SHORTAGE</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                    Eliminate the $244 monthly increase by paying the lump sum shortage of $2,928 upfront. This keeps your payment at the current rate.
+                                </p>
+<button class="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                                    PAY SHORTAGE
+                                </button>
+</div>
+</div>
+<!-- Action 02 -->
+<div class="flex gap-6">
+<span class="serif-italic text-4xl text-outline/30 leading-none">02</span>
+<div class="space-y-4 flex-1">
+<h4 class="font-bold tracking-tight text-xl uppercase italic">GET TEMPLATE</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                    Your tax assessment seems abnormally high for your zip code. Generate a formal appeal letter to contest the valuation.
+                                </p>
+<button class="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                                    GET TEMPLATE
+                                </button>
+</div>
+</div>
+<!-- Action 03 -->
+<div class="flex gap-6">
+<span class="serif-italic text-4xl text-outline/30 leading-none">03</span>
+<div class="space-y-4 flex-1">
+<h4 class="font-bold tracking-tight text-xl uppercase italic">CHECK ELIGIBILITY</h4>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                    Current market rates are 1.2% lower than your note. You may be eligible for a streamline refinance to offset the tax increase.
+                                </p>
+<button class="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                                    CHECK ELIGIBILITY
+                                </button>
+</div>
+</div>
+</div>
+<!-- Secondary Global Action -->
+<div class="mt-16 pt-16 border-t border-black/5">
+<button class="group flex items-center justify-between w-full p-6 bg-surface-container hover:bg-surface-container-high transition-colors">
+<span class="font-sans text-[10px] font-bold uppercase tracking-[0.3em]">SCAN ANOTHER DOCUMENT</span>
+<span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-neutral-100 dark:bg-neutral-950 border-t border-black/5 dark:border-white/5">
+<div class="font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-900 dark:text-neutral-100">
+            © 2024 THE FINANCIAL ARCHITECT. ALL RIGHTS RESERVED.
+        </div>
+<div class="flex gap-8">
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white font-sans text-[10px] uppercase tracking-[0.2em] transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white font-sans text-[10px] uppercase tracking-[0.2em] transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white font-sans text-[10px] uppercase tracking-[0.2em] transition-opacity opacity-80 hover:opacity-100" href="#">Legal Disclaimer</a>
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white font-sans text-[10px] uppercase tracking-[0.2em] transition-opacity opacity-80 hover:opacity-100" href="#">Contact</a>
+</div>
+</footer>
+</body></html>

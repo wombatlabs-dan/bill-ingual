@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analysis | Bill-ingual</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Newsreader & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,700;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#777777",
+                    "on-background": "#1a1c1c",
+                    "on-tertiary-fixed-variant": "#e2e2e2",
+                    "tertiary-fixed": "#5e5e5e",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#eeeeee",
+                    "on-primary": "#e2e2e2",
+                    "primary-fixed": "#5e5e5e",
+                    "primary-fixed-dim": "#474747",
+                    "tertiary-container": "#747474",
+                    "surface-dim": "#dadada",
+                    "background": "#f9f9f9",
+                    "surface-container-low": "#f3f3f4",
+                    "tertiary-fixed-dim": "#474747",
+                    "secondary-container": "#d6d4d3",
+                    "outline-variant": "#c6c6c6",
+                    "on-primary-fixed-variant": "#e2e2e2",
+                    "on-error-container": "#410002",
+                    "on-surface-variant": "#474747",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-tertiary-fixed": "#ffffff",
+                    "tertiary": "#3b3b3b",
+                    "surface-container-high": "#e8e8e8",
+                    "inverse-primary": "#c6c6c6",
+                    "surface-bright": "#f9f9f9",
+                    "on-tertiary-container": "#ffffff",
+                    "secondary": "#5f5e5e",
+                    "secondary-fixed": "#c8c6c6",
+                    "secondary-fixed-dim": "#acabab",
+                    "on-primary-container": "#ffffff",
+                    "surface-tint": "#5e5e5e",
+                    "on-tertiary": "#e2e2e2",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2f3131",
+                    "surface-variant": "#e2e2e2",
+                    "primary": "#000000",
+                    "on-primary-fixed": "#ffffff",
+                    "primary-container": "#3b3b3b",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "on-surface": "#1a1c1c",
+                    "on-secondary-container": "#1b1c1c",
+                    "on-secondary-fixed-variant": "#3b3b3b",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f9f9f9"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Newsreader", "serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .serif { font-family: 'Newsreader', serif; }
+        .scanning-line {
+            height: 2px;
+            background: #000;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            animation: scan 3s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-neutral-50/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-black/10 dark:border-white/10">
+<div class="text-xl font-bold tracking-tighter text-black dark:text-white font-serif italic">
+            Bill-ingual
+        </div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-black dark:text-white border-b-2 border-black dark:border-white pb-1 font-bold font-label text-[10px] uppercase tracking-widest" href="#">Analysis</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors font-label text-[10px] uppercase tracking-widest" href="#">History</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors font-label text-[10px] uppercase tracking-widest" href="#">Archives</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 text-[10px] font-bold tracking-widest hover:bg-primary-container transition-all scale-95 duration-200 ease-in-out">
+            NEW SCAN
+        </button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="min-h-screen pt-32 pb-20 px-8 max-w-7xl mx-auto flex flex-col items-center">
+<!-- Header Section -->
+<header class="w-full mb-20 text-center">
+<h1 class="text-5xl md:text-7xl font-light tracking-tight mb-4">
+                Analyzing your <span class="italic">Mortgage Statement...</span>
+</h1>
+<p class="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant">
+                Sequence ID: ARCH-4492-X
+            </p>
+</header>
+<!-- Asymmetric Layout: Analysis Core -->
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Visual Scanner (Left) -->
+<div class="lg:col-span-7 relative group">
+<div class="aspect-[4/5] bg-surface-container-low relative overflow-hidden border border-black/5">
+<div class="scanning-line"></div>
+<img alt="Document under analysis" class="w-full h-full object-cover grayscale opacity-40 mix-blend-multiply" data-alt="Monochromatic close-up of a complex financial mortgage document with sharp black text and subtle paper texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBouKlCwtdJ8gqiCWN9h-5tJSmY1IGalKKqggCqAIB-F6CT-kN-kIZZR_L2w6Kq9ARq_gmWzUz1RY5pwemSzRh2Hg-6T_bICdZbLossDlx-fIrXxgUQd8xsan6NYzGQywHCRut9QoeMPpeSg-N8WVdZXNp4gCdM_l9G0_ZAcRqHo-P_cCyjhBPY9WTzleHv2x6by36VCyhJwnNJVI-hsgoUcWbkaKvQgjuDEZvnvqk-xrE9VEZr4Z6sLtw7VRQBBk6lC5ANiY97Hfk"/>
+<!-- Overlay Grid -->
+<div class="absolute inset-0 grid grid-cols-6 grid-rows-8 pointer-events-none">
+<div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-b border-black/5"></div>
+<div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-b border-black/5"></div>
+<div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-r border-b border-black/5"></div><div class="border-b border-black/5"></div>
+</div>
+</div>
+<div class="mt-6 flex justify-between items-end">
+<div class="space-y-1">
+<div class="text-[10px] font-label uppercase tracking-widest font-bold">Progress</div>
+<div class="w-64 h-[2px] bg-surface-container-high relative">
+<div class="absolute top-0 left-0 h-full bg-primary w-[65%]"></div>
+</div>
+</div>
+<div class="text-[10px] font-label uppercase tracking-widest font-bold">65% Complete</div>
+</div>
+</div>
+<!-- Task List (Right) -->
+<div class="lg:col-span-5 space-y-12">
+<section>
+<h2 class="font-label text-[10px] font-bold uppercase tracking-[0.2em] mb-8 text-on-surface-variant">Active Operations</h2>
+<ul class="space-y-6">
+<li class="flex items-start gap-4 group">
+<span class="serif text-2xl leading-none text-primary">01</span>
+<div class="flex-1 border-b border-black/5 pb-4">
+<p class="font-label text-[11px] font-bold uppercase tracking-widest mb-1 flex justify-between items-center">
+                                    Reading line items...
+                                    <span class="material-symbols-outlined text-sm text-primary">check_circle</span>
+</p>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Extracting principal, interest, and escrow distributions from page 01.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 group">
+<span class="serif text-2xl leading-none text-primary">02</span>
+<div class="flex-1 border-b border-black/5 pb-4">
+<p class="font-label text-[11px] font-bold uppercase tracking-widest mb-1 flex justify-between items-center">
+                                    Comparing to tax records...
+                                    <span class="material-symbols-outlined text-sm text-primary" data-weight="fill" style="font-variation-settings: 'FILL' 1;">sync</span>
+</p>
+<p class="text-[13px] text-on-surface-variant leading-relaxed">Cross-referencing municipal assessment with current escrow withholdings.</p>
+</div>
+</li>
+<li class="flex items-start gap-4 group">
+<span class="serif text-2xl leading-none text-neutral-300">03</span>
+<div class="flex-1 border-b border-black/5 pb-4">
+<p class="font-label text-[11px] font-bold uppercase tracking-widest mb-1 text-neutral-400">
+                                    Identifying discrepancy...
+                                </p>
+<p class="text-[13px] text-neutral-400 leading-relaxed italic">Awaiting data from previous sequence.</p>
+</div>
+</li>
+</ul>
+</section>
+<div class="bg-surface-container-lowest p-8 border-l-4 border-black">
+<p class="serif italic text-xl leading-snug text-primary">
+                        "Precision in audit is the foundation of structural wealth."
+                    </p>
+<p class="mt-4 font-label text-[9px] uppercase tracking-widest text-on-surface-variant">
+                        — The Architect's Handbook, 1924
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-neutral-100 dark:bg-neutral-950 border-t border-black/5 dark:border-white/5">
+<div class="text-neutral-900 dark:text-neutral-100 font-sans text-[10px] uppercase tracking-[0.2em]">
+            © 2024 THE FINANCIAL ARCHITECT. ALL RIGHTS RESERVED.
+        </div>
+<div class="flex gap-8">
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white transition-opacity opacity-80 hover:opacity-100 font-sans text-[10px] uppercase tracking-[0.2em]" href="#">Terms of Service</a>
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white transition-opacity opacity-80 hover:opacity-100 font-sans text-[10px] uppercase tracking-[0.2em]" href="#">Privacy Policy</a>
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white transition-opacity opacity-80 hover:opacity-100 font-sans text-[10px] uppercase tracking-[0.2em]" href="#">Legal Disclaimer</a>
+<a class="text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white transition-opacity opacity-80 hover:opacity-100 font-sans text-[10px] uppercase tracking-[0.2em]" href="#">Contact</a>
+</div>
+</footer>
+</body></html>
