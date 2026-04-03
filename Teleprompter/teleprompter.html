@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Bill-ingual Teleprompter</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #000;
+      color: #f5f0d8;
+      font-family: Georgia, serif;
+      overflow: hidden;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Top bar ── */
+    #topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: #111;
+      border-bottom: 1px solid #333;
+      flex-shrink: 0;
+      gap: 10px;
+    }
+
+    #section-label {
+      font-size: 13px;
+      color: #aaa;
+      font-style: italic;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #timer {
+      font-size: 22px;
+      font-weight: bold;
+      font-family: monospace;
+      color: #4ade80;
+      flex-shrink: 0;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    #timer.warning { color: #facc15; }
+    #timer.danger  { color: #f87171; }
+
+    /* ── Script scroll area ── */
+    #scroll-window {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #script {
+      padding: 40px 20px 60vh 20px;
+      font-size: 26px;
+      line-height: 1.7;
+      will-change: transform;
+      transition: transform 0.15s linear;
+    }
+
+    .section {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #888;
+      margin-bottom: 14px;
+      border-left: 3px solid #444;
+      padding-left: 10px;
+    }
+
+    .cue {
+      color: #94a3b8;
+      font-style: italic;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .spoken {
+      color: #f5f0d8;
+      margin-bottom: 14px;
+    }
+
+    .spoken strong, .spoken b {
+      color: #fde68a;
+    }
+
+    .tip {
+      background: #1a1a2e;
+      border-left: 3px solid #6366f1;
+      padding: 10px 14px;
+      font-size: 17px;
+      color: #a5b4fc;
+      margin-top: 6px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* ── Reading guide line ── */
+    #guide {
+      position: absolute;
+      top: 35%;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(250, 204, 21, 0.25);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* gradient fade top/bottom */
+    #scroll-window::before,
+    #scroll-window::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 80px;
+      z-index: 5;
+      pointer-events: none;
+    }
+    #scroll-window::before {
+      top: 0;
+      background: linear-gradient(to bottom, #000 0%, transparent 100%);
+    }
+    #scroll-window::after {
+      bottom: 0;
+      background: linear-gradient(to top, #000 0%, transparent 100%);
+    }
+
+    /* ── Bottom controls ── */
+    #controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      background: #111;
+      border-top: 1px solid #333;
+      flex-shrink: 0;
+      gap: 8px;
+    }
+
+    .btn {
+      background: #222;
+      color: #eee;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 15px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      transition: background 0.1s;
+    }
+    .btn:active { background: #3a3a3a; }
+    .btn.primary {
+      background: #1d4ed8;
+      border-color: #3b82f6;
+      color: #fff;
+      font-weight: bold;
+    }
+    .btn.primary:active { background: #2563eb; }
+    .btn.danger-btn {
+      background: #7f1d1d;
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+
+    #speed-display {
+      font-size: 13px;
+      color: #888;
+      text-align: center;
+      min-width: 52px;
+    }
+
+    /* ── Progress bar ── */
+    #progress-bar {
+      height: 3px;
+      background: #222;
+      flex-shrink: 0;
+    }
+    #progress-fill {
+      height: 100%;
+      background: #3b82f6;
+      width: 0%;
+      transition: width 0.3s;
+    }
+  </style>
+</head>
+<body>
+
+<div id="topbar">
+  <div id="section-label">Bill-ingual Pitch</div>
+  <div id="timer">0:00</div>
+</div>
+
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<div id="scroll-window">
+  <div id="guide"></div>
+  <div id="script">
+
+    <!-- OPENING -->
+    <div class="section" data-label="Opening — Show of Hands">
+      <div class="section-title">🙋 Opening — Show of Hands (~30 sec)</div>
+      <div class="cue">[Title slide up. Stand in front of audience.]</div>
+      <div class="spoken">"Quick show of hands — how many people here have a mortgage?"</div>
+      <div class="cue">[hands go up]</div>
+      <div class="spoken">"Keep your hand up if you've ever been surprised by a payment increase you didn't expect."</div>
+      <div class="cue">[some hands stay — make eye contact, let it breathe]</div>
+      <div class="spoken">"OK. New question — how many of you have ever received a medical bill and thought... I have no idea what this means or if it's even correct?"</div>
+      <div class="cue">[lots of hands]</div>
+      <div class="spoken">"That's pretty much everyone. You're not alone — <strong>$88 billion</strong> in medical debt is sitting on credit reports right now, and <strong>60%</strong> of homeowners are surprised when their mortgage payment changes. We built <strong>Bill-ingual</strong> — the financial translator you've been Googling for."</div>
+      <div class="tip">💡 Only two stats: $88B and 60%. Audience already proved the problem — stats just confirm it.</div>
+    </div>
+
+    <!-- SOLUTION -->
+    <div class="section" data-label="Solution — Three Layers">
+      <div class="section-title">💡 Solution — Three Layers (~20 sec)</div>
+      <div class="cue">[Click to Solution slide]</div>
+      <div class="spoken">"Bill-ingual gives you three answers for any financial document you upload:</div>
+      <div class="spoken"><strong>What does this say?</strong> Plain English. No jargon.<br>
+      <strong>Why should I care?</strong> What changed and what it means for your wallet.<br>
+      <strong>What should I do?</strong> A dispute letter, a payment recommendation, or just reassurance.</div>
+      <div class="spoken">One upload. Three answers. Let me show you."</div>
+      <div class="tip">💡 Speed through this. It's setup for the demos — don't linger.</div>
+    </div>
+
+    <!-- MORTGAGE DEMO -->
+    <div class="section" data-label="Demo 1 — Mortgage">
+      <div class="section-title">🏠 Demo 1 — Mortgage (~30 sec)</div>
+      <div class="cue">[Click to mortgage demo slide or live demo]</div>
+      <div class="spoken">"Sarah and Michael just bought their first home. They get a three-page letter saying their payment is jumping from $1,800 to $1,987. It's full of escrow projections and RESPA disclosures. They don't even know what escrow <em>means</em>.</div>
+      <div class="spoken">Bill-ingual reads it and starts with the basics: <strong>'Escrow is a savings account your lender manages to pay your taxes and insurance. Your county reassessed your home's value up 18%, so your taxes went up. That's why your payment increased.'</strong></div>
+      <div class="spoken">Then it recommends which payment option to pick and tells them they can file a free property tax protest. That's not fighting back — that's <strong>understanding</strong>."</div>
+      <div class="tip">💡 Slow down on "they don't even know what escrow means." That's the relatable moment.</div>
+    </div>
+
+    <!-- MEDICAL BILL DEMO -->
+    <div class="section" data-label="Demo 2 — Medical Bill">
+      <div class="section-title">🏥 Demo 2 — Medical Bill (~30 sec)</div>
+      <div class="cue">[Click to medical bill demo slide or live demo]</div>
+      <div class="spoken">"Now the medical bill. Maria goes to the ER for an ankle injury. She gets a bill for <strong>$1,400</strong>.</div>
+      <div class="spoken">Bill-ingual cross-references the bill with her insurance EOB and catches something: her actual responsibility is only <strong>$340</strong>. She's being <strong>overcharged $1,060</strong>.</div>
+      <div class="spoken">The hospital billed at full price instead of the negotiated insurance rate. Bill-ingual catches the discrepancy and generates a dispute letter. That's $1,060 back in her pocket."</div>
+      <div class="tip">💡 Hit "$1,060" hard. Pause after it. Judges remember dollar amounts.</div>
+    </div>
+
+    <!-- MARKET -->
+    <div class="section" data-label="Market + Competitive Gap">
+      <div class="section-title">📊 Market + Competitive Gap (~25 sec)</div>
+      <div class="spoken">"<strong>$88 billion</strong> in medical debt. Escrow is the number one complaint at the CFPB. The market is massive.</div>
+      <div class="spoken">And nobody's solving this. Monarch and Copilot track spending — they don't explain documents. CoPatient audits medical bills but takes 35% and weeks. NerdWallet gives generic articles.</div>
+      <div class="spoken"><strong>Nobody</strong> takes YOUR document and gives you a personalized explanation with next steps. That's the gap."</div>
+    </div>
+
+    <!-- CLOSE -->
+    <div class="section" data-label="Team + Close">
+      <div class="section-title">🎯 Team + Close (~15 sec)</div>
+      <div class="spoken">"We're Dan, Jackie, and Kevin. We built Bill-ingual today because we've all been that person staring at a confusing bill.</div>
+      <div class="spoken"><strong>$88 billion in medical debt. 60% of homeowners blindsided by escrow. We built the financial translator they've been Googling for.</strong></div>
+      <div class="spoken">Thank you."</div>
+      <div class="tip">💡 Killer stat callback lands because the audience already raised their hands. Full circle moment.</div>
+    </div>
+
+  </div><!-- #script -->
+</div><!-- #scroll-window -->
+
+<div id="controls">
+  <button class="btn" id="btn-slower">🐢</button>
+  <div id="speed-display">Speed: 1×</div>
+  <button class="btn" id="btn-faster">🐇</button>
+  <button class="btn primary" id="btn-playpause">▶ Start</button>
+  <button class="btn danger-btn" id="btn-reset">↺</button>
+</div>
+
+<script>
+  const script = document.getElementById('script');
+  const timerEl = document.getElementById('timer');
+  const progressFill = document.getElementById('progress-fill');
+  const sectionLabel = document.getElementById('section-label');
+  const btnPlay = document.getElementById('btn-playpause');
+  const btnReset = document.getElementById('btn-reset');
+  const btnFaster = document.getElementById('btn-faster');
+  const btnSlower = document.getElementById('btn-slower');
+  const speedDisplay = document.getElementById('speed-display');
+
+  // Scroll state
+  let scrollY = 0;
+  let playing = false;
+  let speed = 40; // px per second base
+  const speedStep = 10;
+  const minSpeed = 10;
+  const maxSpeed = 120;
+  const speedLabels = { 10:'0.3×', 20:'0.5×', 30:'0.8×', 40:'1×', 50:'1.3×', 60:'1.5×', 70:'1.8×', 80:'2×', 90:'2.3×', 100:'2.5×', 110:'2.8×', 120:'3×' };
+
+  // Timer state
+  let startTime = null;
+  let elapsedAtPause = 0;
+  let timerInterval = null;
+
+  // Total scrollable height
+  function maxScroll() {
+    return script.scrollHeight - document.getElementById('scroll-window').clientHeight;
+  }
+
+  function applyScroll() {
+    script.style.transform = `translateY(${-scrollY}px)`;
+    const pct = Math.min(100, (scrollY / Math.max(1, maxScroll())) * 100);
+    progressFill.style.width = pct + '%';
+    updateSectionLabel();
+  }
+
+  // Section tracking
+  const sections = Array.from(document.querySelectorAll('.section'));
+  function updateSectionLabel() {
+    const windowMid = document.getElementById('scroll-window').clientHeight * 0.35;
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const rect = sections[i].getBoundingClientRect();
+      if (rect.top <= windowMid) {
+        sectionLabel.textContent = sections[i].dataset.label || '';
+        return;
+      }
+    }
+    sectionLabel.textContent = 'Bill-ingual Pitch';
+  }
+
+  // Animation loop
+  let lastTs = null;
+  function tick(ts) {
+    if (!playing) return;
+    if (lastTs !== null) {
+      const delta = (ts - lastTs) / 1000;
+      scrollY = Math.min(scrollY + speed * delta, maxScroll());
+      applyScroll();
+      if (scrollY >= maxScroll()) {
+        pause();
+        timerEl.style.color = '#4ade80';
+      }
+    }
+    lastTs = ts;
+    requestAnimationFrame(tick);
+  }
+
+  function play() {
+    if (playing) return;
+    playing = true;
+    lastTs = null;
+    btnPlay.textContent = '⏸ Pause';
+    // Start timer
+    startTime = Date.now() - elapsedAtPause;
+    timerInterval = setInterval(updateTimer, 500);
+    requestAnimationFrame(tick);
+  }
+
+  function pause() {
+    if (!playing) return;
+    playing = false;
+    btnPlay.textContent = '▶ Resume';
+    elapsedAtPause = Date.now() - startTime;
+    clearInterval(timerInterval);
+  }
+
+  function reset() {
+    pause();
+    scrollY = 0;
+    applyScroll();
+    elapsedAtPause = 0;
+    startTime = null;
+    timerEl.textContent = '0:00';
+    timerEl.className = '';
+    btnPlay.textContent = '▶ Start';
+  }
+
+  function updateTimer() {
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const m = Math.floor(elapsed / 60);
+    const s = elapsed % 60;
+    timerEl.textContent = m + ':' + String(s).padStart(2, '0');
+    // Color cues
+    if (elapsed >= 180) {
+      timerEl.className = 'danger';
+    } else if (elapsed >= 150) {
+      timerEl.className = 'warning';
+    } else {
+      timerEl.className = '';
+    }
+  }
+
+  function updateSpeedDisplay() {
+    speedDisplay.textContent = 'Speed: ' + (speedLabels[speed] || speed + 'px');
+  }
+
+  // Button events
+  btnPlay.addEventListener('click', () => playing ? pause() : play());
+  btnReset.addEventListener('click', reset);
+  btnFaster.addEventListener('click', () => {
+    speed = Math.min(maxSpeed, speed + speedStep);
+    updateSpeedDisplay();
+  });
+  btnSlower.addEventListener('click', () => {
+    speed = Math.max(minSpeed, speed - speedStep);
+    updateSpeedDisplay();
+  });
+
+  // Touch swipe to manually scroll
+  let touchStartY = null;
+  let scrollAtTouch = null;
+  document.getElementById('scroll-window').addEventListener('touchstart', e => {
+    touchStartY = e.touches[0].clientY;
+    scrollAtTouch = scrollY;
+  }, { passive: true });
+  document.getElementById('scroll-window').addEventListener('touchmove', e => {
+    if (touchStartY === null) return;
+    const dy = touchStartY - e.touches[0].clientY;
+    scrollY = Math.max(0, Math.min(maxScroll(), scrollAtTouch + dy));
+    applyScroll();
+  }, { passive: true });
+
+  // Tap on script area = play/pause
+  document.getElementById('scroll-window').addEventListener('click', () => {
+    playing ? pause() : play();
+  });
+
+  updateSpeedDisplay();
+  applyScroll();
+</script>
+</body>
+</html>
