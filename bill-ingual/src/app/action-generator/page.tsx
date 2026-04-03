@@ -9,30 +9,35 @@ import MaterialSymbol from "@/components/MaterialSymbol";
 export default function ActionGenerator() {
   const [activeTab, setActiveTab] = useState<"dispute" | "phone">("dispute");
 
-  const disputeLetter = `To: HomeBridge Mortgage Services, Escrow Services Department
+  const disputeLetter = `To: Austin Regional Medical Center, Patient Billing Department
 Date: April 3, 2026
-Re: Dispute of Escrow Shortage and Payment Increase — Loan #0087-4421-9903
+Re: Formal Dispute of Duplicate Charge — Account #MED-2026-00341
 
-Dear Escrow Services Team,
+Dear Billing Department,
 
-I am writing to formally dispute the $186.72/month payment increase and the escrow shortage of $1,099.86 identified on my March 1, 2026 statement for the property at 1847 Oakridge Drive, Austin, TX 78745.
+I am writing to formally dispute a duplicate charge on my bill dated March 15, 2026 for services rendered on February 28, 2026 at Austin Regional Medical Center.
 
-We dispute this charge on the following grounds:
+My bill (Account #MED-2026-00341) includes CPT code 99213 (Office Visit, Established Patient) listed twice — on lines 4 and 7 — totaling $312.00 in duplicate charges. My insurance EOB (Reference #BCBS-2026-88214) confirms that the first instance of CPT 99213 was paid in full at $312.00. The second charge is a billing error.
 
-1. The escrow shortage stems entirely from an unexpected 18% property tax assessment increase by Travis County (from $285,000 to $336,300). This assessment is being actively contested. We have filed — or intend to file — a protest with Travis County Appraisal District before the May 15, 2026 deadline.
+I dispute this charge on the following grounds:
 
-2. Under RESPA Section 10 (12 CFR § 1024.17), if a property tax protest results in a reduced assessment, we have the right to request an updated escrow analysis. We ask that you note this dispute on our account and hold any collection of the shortage pending the outcome of the tax protest.
+1. Duplicate billing for the same CPT code on the same date of service is a violation of standard medical billing practice and may constitute insurance fraud under 18 U.S.C. § 1347.
 
-3. We request a full line-item breakdown of the escrow calculation, including all projected disbursements, per our rights under RESPA Section 10(e).
+2. My Explanation of Benefits from Blue Cross Blue Shield (attached) confirms only one instance of CPT 99213 was authorized and paid for the February 28, 2026 visit.
 
-We are not refusing payment — we will continue making our current monthly payment of $1,800.42 while this dispute is under review. We ask that you delay implementing the increased payment until the tax protest is resolved.
+3. Under the No Surprises Act and standard patient billing rights, I am entitled to an itemized bill and a correction of any billing errors identified.
 
-Please respond in writing within 20 business days per RESPA requirements.
+I am requesting:
+— Immediate removal of the duplicate CPT 99213 charge ($312.00)
+— A corrected itemized statement reflecting the accurate balance owed
+— Written confirmation of the adjustment within 30 days
+
+Please contact me at the information below to confirm receipt of this dispute.
 
 Sincerely,
-Sarah Chen & Michael Chen
-1847 Oakridge Drive, Austin, TX 78745
-Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
+Sarah Chen
+4201 Congress Ave, Austin, TX 78701
+Account #MED-2026-00341 | Insurance ID: BCBS-TX-4421839`;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -63,7 +68,7 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
                     Original Document
                   </h2>
                   <p className="serif text-2xl italic">
-                    Reference: Mortgage Statement
+                    Reference: Medical Bill
                   </p>
                 </div>
                 <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">
@@ -73,36 +78,40 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
               <div className="bg-white p-8 md:p-12 shadow-sm border border-black/5 flex-grow min-h-[600px] relative overflow-hidden">
                 <div className="space-y-6 opacity-80">
                   <div className="flex justify-between items-start border-b border-black/10 pb-6">
-                    <div className="font-bold text-lg">HOMEBRIDGE MORTGAGE SERVICES</div>
+                    <div className="font-bold text-lg">AUSTIN REGIONAL MEDICAL CENTER</div>
                     <div className="text-right text-xs">
-                      <p>Statement Date: March 1, 2026</p>
-                      <p>Loan #: 0087-4421-9903</p>
+                      <p>Statement Date: March 15, 2026</p>
+                      <p>Account #: MED-2026-00341</p>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div className="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">
-                      Escrow Account Analysis
+                      Itemized Charges — Visit: Feb 28, 2026
                     </div>
                     <div className="flex justify-between text-sm py-2 border-b border-black/5">
-                      <span>Property Taxes (Travis County)</span>
-                      <span className="font-bold">$7,062.30/yr</span>
+                      <span>99213 — Office Visit, Est. Patient</span>
+                      <span className="font-bold">$312.00</span>
                     </div>
                     <div className="flex justify-between text-sm py-2 border-b border-black/5">
-                      <span>Homeowner&apos;s Insurance</span>
-                      <span className="font-bold">$1,608.00/yr</span>
+                      <span>85025 — Complete Blood Count (CBC)</span>
+                      <span className="font-bold">$47.00</span>
+                    </div>
+                    <div className="flex justify-between text-sm py-2 border-b border-black/5 text-primary font-semibold">
+                      <span>99213 — Office Visit, Est. Patient</span>
+                      <span className="font-bold">$312.00</span>
                     </div>
                     <div className="flex justify-between text-sm py-2 border-b border-black/5">
-                      <span>FHA Mortgage Insurance (MIP)</span>
-                      <span className="font-bold">$138.50/mo</span>
+                      <span>36415 — Routine Venipuncture</span>
+                      <span className="font-bold">$28.00</span>
                     </div>
                   </div>
-                  <div className="mt-12 p-4 bg-primary/5 border border-primary/10">
+                  <div className="mt-8 p-4 bg-primary/5 border border-primary/10">
                     <p className="text-[10px] font-bold tracking-widest uppercase mb-2 text-primary">
                       System Flagged Issue
                     </p>
                     <p className="text-xs italic serif leading-relaxed">
-                      &quot;Travis County raised assessed value 18% ($285,000 → $336,300),
-                      creating a $1,099.86 escrow shortage. Protest deadline: May 15, 2026.&quot;
+                      &quot;CPT 99213 appears twice on the same date of service.
+                      Insurance EOB #BCBS-2026-88214 confirms this code was paid in full ($312.00). Second charge is a duplicate billing error.&quot;
                     </p>
                   </div>
                 </div>
@@ -183,10 +192,10 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
                   <div className="bg-surface-container-low p-6 space-y-2">
                     <p className="text-[10px] font-bold uppercase tracking-widest mb-3">Have these ready:</p>
                     {[
-                      "Loan #0087-4421-9903 and Servicer Acct #HB-20250315-0874421",
-                      "Your March 1, 2026 statement (page 1 — the escrow shortage table)",
-                      "Travis County's reassessment notice showing $336,300",
-                      "Pen and paper — get the rep's name and a call reference number",
+                      "Account #MED-2026-00341 and your date of service: February 28, 2026",
+                      "Your itemized bill showing CPT 99213 on lines 4 and 7",
+                      "Insurance EOB #BCBS-2026-88214 showing CPT 99213 paid in full",
+                      "Pen and paper — get the rep's name and a case reference number",
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3 text-sm">
                         <span className="serif italic text-outline/60 leading-none mt-0.5">{i + 1}.</span>
@@ -201,7 +210,7 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
                   <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant mb-3">Opening</p>
                   <div className="border-l-4 border-primary p-5 bg-surface-container-lowest">
                     <p className="text-sm leading-relaxed serif italic">
-                      &quot;Hi, I&apos;m calling about an escrow shortage on my account — loan number 0087-4421-9903. I received a statement showing a $186.72 monthly payment increase starting April 2026, and I&apos;d like to formally dispute it. Can you connect me with someone in Escrow Services?&quot;
+                      &quot;Hi, I&apos;m calling about a billing error on account number MED-2026-00341. My bill from March 15, 2026 has a duplicate charge — CPT code 99213 appears twice for the same visit on February 28th. My insurance already paid that code in full. I&apos;d like to dispute the duplicate charge and get a corrected statement. Can you connect me with someone in patient billing?&quot;
                     </p>
                   </div>
                 </div>
@@ -212,20 +221,20 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
                   <div className="space-y-4">
                     {[
                       {
-                        label: "The shortage isn't your fault",
-                        script: "\"The shortage was caused entirely by Travis County raising my property tax assessment 18% — from $285,000 to $336,300. I had no way to anticipate that, and I'm actively filing a tax protest before the May 15 deadline.\"",
+                        label: "Identify the exact duplicate",
+                        script: "\"CPT 99213 appears on line 4 and again on line 7 of my itemized bill — both for February 28, 2026. The same CPT code cannot be billed twice for the same visit. This is a duplicate charge.\"",
                       },
                       {
-                        label: "Invoke your RESPA rights",
-                        script: "\"Under RESPA Section 10, I have the right to request an updated escrow analysis if my tax protest is successful. I'm asking you to note this dispute on my account and hold the payment increase while the protest is pending.\"",
+                        label: "Reference your EOB",
+                        script: "\"My Explanation of Benefits from Blue Cross Blue Shield, reference number BCBS-2026-88214, confirms that CPT 99213 was authorized and paid in full at $312.00. I have this document in front of me.\"",
                       },
                       {
-                        label: "Request an escrow account inspection",
-                        script: "\"Per RESPA Section 10(e), I'd like to formally request a full line-item escrow account inspection — including all projected disbursements and the cushion calculation. Can you initiate that?\"",
+                        label: "Cite your rights",
+                        script: "\"Under the No Surprises Act, I'm entitled to an accurate itemized bill. I'm formally requesting that the duplicate $312.00 charge be removed and that I receive a corrected statement in writing within 30 days.\"",
                       },
                       {
-                        label: "Confirm you're not stopping payments",
-                        script: "\"To be clear, I'm not refusing to pay. I'll continue at my current $1,800.42/month. I'm just asking you to delay the increase until the assessment dispute is resolved.\"",
+                        label: "Clarify what you owe",
+                        script: "\"I'm not disputing any other charges on this bill. I'm happy to pay the corrected balance once the duplicate CPT 99213 is removed. I just need a corrected statement first.\"",
                       },
                     ].map((point, i) => (
                       <div key={i} className="border border-black/10 p-5">
@@ -241,8 +250,8 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
                   <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant mb-3">If They Push Back</p>
                   <div className="space-y-3">
                     {[
-                      { q: "\"We can't stop the payment increase\"", a: "\"I understand. Can you escalate this to a supervisor and note my RESPA dispute request on the account? I'll also be following up in writing.\"" },
-                      { q: "\"The shortage must be paid\"", a: "\"I'm aware of Option A and Option B. I'm not disputing the method — I'm disputing the underlying assessment. Please note the protest and we can revisit after May 15.\"" },
+                      { q: "\"Both charges are valid\"", a: "\"Can you explain how the same CPT code for the same patient on the same date of service can be billed twice? I have my EOB showing it was already paid. I'd like to escalate this to a billing supervisor.\"" },
+                      { q: "\"You still owe the balance\"", a: "\"I understand there may be other charges. I'm only disputing the duplicate CPT 99213 line. Once I receive a corrected itemized statement, I'll pay the remaining balance promptly.\"" },
                     ].map((item, i) => (
                       <div key={i} className="bg-surface-container-low p-5">
                         <p className="text-[10px] font-bold uppercase tracking-widest mb-1 text-outline">They say:</p>
@@ -259,9 +268,9 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
                   <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant mb-3">Before You Hang Up</p>
                   <div className="bg-primary text-on-primary p-6 space-y-2">
                     {[
-                      "Get the rep's full name and employee ID",
-                      "Ask for a call reference or confirmation number",
-                      "Confirm they've noted the RESPA dispute on your account",
+                      "Get the rep's full name and direct extension",
+                      "Ask for a case or reference number for this dispute",
+                      "Confirm a corrected statement will be mailed or emailed within 30 days",
                       "Follow up with the written dispute letter within 24 hours",
                     ].map((item, i) => (
                       <div key={i} className="flex items-start gap-3 text-sm">
@@ -283,9 +292,10 @@ Loan #0087-4421-9903 | Servicer Acct #: HB-20250315-0874421`;
                 Expert Insight
               </h3>
               <p className="serif text-lg italic leading-tight mb-4">
-                &quot;The strongest lever here is the tax protest. A successful appeal
-                rolls back your escrow requirement and locks in a lower payment
-                permanently.&quot;
+                &quot;Duplicate CPT codes on the same date of service are one of the
+                most common — and most winnable — medical billing disputes.
+                Providers correct these in over 90% of cases when presented with
+                an EOB.&quot;
               </p>
               <div className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
                 — Bill-ingual Analysis

@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -30,8 +30,10 @@ const steps = [
   },
 ];
 
-export default function AnalysisInProgress() {
+function AnalysisInProgressInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const doc = searchParams.get("doc") ?? "mortgage";
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -44,7 +46,7 @@ export default function AnalysisInProgress() {
 
       if (pct >= 1) {
         clearInterval(interval);
-        setTimeout(() => router.push("/analysis/results"), 300);
+        setTimeout(() => router.push(`/analysis/results?doc=${doc}`), 300);
       }
     }, 50);
 
@@ -177,5 +179,13 @@ export default function AnalysisInProgress() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function AnalysisInProgress() {
+  return (
+    <Suspense>
+      <AnalysisInProgressInner />
+    </Suspense>
   );
 }
