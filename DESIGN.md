@@ -2,7 +2,7 @@
 
 ## 1. Overview & Creative North Star
 
-The Creative North Star for this design system is **"The Financial Architect."**
+The Creative North Star for this design system is **"Bill-ingual."**
 
 Moving beyond the generic "SaaS template" aesthetic, this system draws inspiration from the heritage of the *Wall Street Journal* and high-end boutique annual reports. It is designed to transform complex financial data into a narrative that feels authoritative, clear, and reassuring.
 

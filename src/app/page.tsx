@@ -1,12 +1,44 @@
+"use client";
+
+import { useRef } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MaterialSymbol from "@/components/MaterialSymbol";
 
 export default function UploadDocument() {
+  const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files.length > 0) {
+      router.push("/analysis");
+    }
+  }
+
+  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      router.push("/analysis");
+    }
+  }
+
+  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
+
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".pdf,.jpg,.jpeg,.png"
+        className="hidden"
+        onChange={handleFileChange}
+      />
 
       <main className="flex-1 pt-32 pb-20 px-6 max-w-7xl mx-auto">
         <header className="mb-16 md:mb-24">
@@ -22,10 +54,15 @@ export default function UploadDocument() {
 
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-32">
           <div className="lg:col-span-8 group">
-            <div className="relative aspect-[16/9] md:aspect-[21/9] bg-surface-container-lowest border border-outline-variant/30 flex flex-col items-center justify-center p-12 transition-all hover:bg-surface-container-low">
+            <div
+              className="relative aspect-[16/9] md:aspect-[21/9] bg-surface-container-lowest border border-outline-variant/30 flex flex-col items-center justify-center p-12 transition-all hover:bg-surface-container-low cursor-pointer"
+              onDrop={handleDrop}
+              onDragOver={handleDragOver}
+              onClick={() => fileInputRef.current?.click()}
+            >
               <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuAl3UpYVSynjM9d-HMdqfDg-297iS1QfAvh_XX1Qz6HUnVY7LLM0Y8tK6-ZygnSp7LcwMKG5VnVvenHYxYBlB63QJbEg7LKM9qfzYtjxM8N9Lr4TwuQWHeX4GGNUNAe92mckU5b1sZLzYaatQxdUlRpXK5JIXJ-_BhDQKfhb5nEsREpxOv4-BjefJBQH6z0Zq_IXrkacMhSUFVCsqH59nAe31Ag1ChlOZDkOZvNVwwLek4HrbGdu8a0is6cSX90IOegbFUsQuoepwE')] bg-cover bg-center" />
               <MaterialSymbol
-                icon="upload_file"
+                icon="description"
                 className="text-5xl mb-6 text-primary"
               />
               <h2 className="serif text-3xl mb-4 text-center">
@@ -34,7 +71,13 @@ export default function UploadDocument() {
               <p className="font-body text-xs tracking-widest uppercase text-outline mb-8">
                 PDF, JPG, PNG (Max 50MB)
               </p>
-              <button className="bg-primary text-on-primary px-10 py-4 text-xs font-bold tracking-[0.3em] uppercase hover:bg-primary-container transition-all flex items-center gap-3">
+              <button
+                className="bg-primary text-on-primary px-10 py-4 text-xs font-bold tracking-[0.3em] uppercase hover:bg-primary-container transition-all flex items-center gap-3"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  fileInputRef.current?.click();
+                }}
+              >
                 SELECT FILE
               </button>
             </div>
@@ -159,7 +202,7 @@ export default function UploadDocument() {
                 fill
                 className="object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                 alt="Minimalist layout showing a blurred bank statement"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUpoUNqZsxMcdEL6L5IvYZ2pj_aQY25Lj-11RQMq4xvcDWoDRS0i0Fy5RyYSNJC8j7Tmk0Z8xQwPUGxyipt96gE5aUD6YHat-t80Vem7U7JHnlsCGbdNYjWG-xOERPH6jqGvp3pz1owqzDjAjMUplos-HYWVLQAmgZ2iKnZohHkoTE1TqQOJ0lispt0J8M2W0utRW2hx4Gvh0JSS8bVwJVKizwObok7ArHyLtzh7K0Y-nlb6zaIEQum3mnJ3CMFjv1g2YOEO4fxYg"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUpoUNqZsxMcdEL6L5IvYZ2pj_aQY25Lj-11RQMq4xvcDWoDRS0i0Fy5RyYSNJC8j7Tmk0Z8xQwPUGxyipt96gE5aUD6YHat-t80Vem7U7JHnlsCGbdNYjWG-xOERPH6jqGvb3pz1owqzDjAjMUplos-HYWVLQAmgZ2iKnZohHkoTE1TqQOJ0lispt0J8M2W0utRW2hx4Gvh0JSS8bVwJVKizwObok7ArHyLtzh7K0Y-nlb6zaIEQum3mnJ3CMFjv1g2YOEO4fxYg"
               />
               <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/60 to-transparent w-full">
                 <span className="text-white font-body text-[10px] uppercase tracking-[0.2em]">
@@ -178,7 +221,10 @@ export default function UploadDocument() {
             Ready to see the <span className="italic">numbers?</span>
           </h2>
           <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-            <button className="bg-primary text-on-primary px-12 py-5 text-sm font-bold tracking-[0.3em] uppercase hover:bg-primary-container transition-all">
+            <button
+              className="bg-primary text-on-primary px-12 py-5 text-sm font-bold tracking-[0.3em] uppercase hover:bg-primary-container transition-all"
+              onClick={() => fileInputRef.current?.click()}
+            >
               SCAN DOCUMENT NOW
             </button>
             <button className="text-primary px-12 py-5 text-sm font-bold tracking-[0.3em] uppercase border border-outline-variant/30 hover:bg-surface-container transition-all">

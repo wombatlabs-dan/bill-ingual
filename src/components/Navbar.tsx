@@ -13,7 +13,7 @@ export default function Navbar({ activeLink }: NavbarProps) {
         href="/"
         className="text-xl font-bold tracking-tighter text-black dark:text-white font-serif italic"
       >
-        The Financial Architect
+        Bill-ingual
       </Link>
       <div className="hidden md:flex items-center gap-8">
         <Link

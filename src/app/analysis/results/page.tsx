@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MaterialSymbol from "@/components/MaterialSymbol";
 import Link from "next/link";
 
 export default function AnalysisResults() {
+  const router = useRouter();
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar activeLink="analysis" />
@@ -72,19 +76,7 @@ export default function AnalysisResults() {
               </div>
             </div>
 
-            <div className="relative h-64 w-full bg-surface-container overflow-hidden">
-              <Image
-                alt="Abstract financial architecture"
-                fill
-                className="object-cover grayscale opacity-40 mix-blend-multiply"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ9scFR7ur3yW1NxDiky9ihQOhv2TiloBTOkuFRT5JC8T6Up4T-shxeTGcTeyVX4AJvV0v7w5X7V0qyb9m0RXkv-OaGsD4N5u4ZW-6tTYt0HE_NxXJnqCZjx365CYUOwIvycE5cqmxdYIB4FJOUCZVliUObxJsTig-JEpomFikaY5coiWioeFr8ZbNrABWvSvXFMHGhQQeKQzGgSlErQwYBG4rdpafkaNr_0uQwVNfomrGrDfzix2mn5Gl_YhZV-LZy7wwJ9Tmn0Q"
-              />
-              <div className="absolute inset-0 flex items-center justify-center border border-black/5">
-                <div className="bg-white/90 backdrop-blur p-6 text-center border border-black/5">
-                  <p className="serif italic text-xl">The Architecture of Equity</p>
-                </div>
-              </div>
-            </div>
+
           </div>
 
           <div className="lg:col-span-5">
@@ -154,7 +146,10 @@ export default function AnalysisResults() {
               </div>
 
               <div className="mt-16 pt-16 border-t border-black/5">
-                <button className="group flex items-center justify-between w-full p-6 bg-surface-container hover:bg-surface-container-high transition-colors">
+                <button
+                  onClick={() => router.push("/")}
+                  className="group flex items-center justify-between w-full p-6 bg-surface-container hover:bg-surface-container-high transition-colors"
+                >
                   <span className="font-sans text-[10px] font-bold uppercase tracking-[0.3em]">
                     SCAN ANOTHER DOCUMENT
                   </span>

@@ -1,9 +1,58 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MaterialSymbol from "@/components/MaterialSymbol";
 
+const TOTAL_DURATION = 4000; // ms
+
+const steps = [
+  {
+    num: "01",
+    label: "Reading line items...",
+    detail: "Extracting principal, interest, and escrow distributions from page 01.",
+    completesAt: 0.3,
+  },
+  {
+    num: "02",
+    label: "Comparing to tax records...",
+    detail: "Cross-referencing municipal assessment with current escrow withholdings.",
+    completesAt: 0.65,
+  },
+  {
+    num: "03",
+    label: "Identifying discrepancy...",
+    detail: "Flagging anomalies and preparing your plain-language breakdown.",
+    completesAt: 1.0,
+  },
+];
+
 export default function AnalysisInProgress() {
+  const router = useRouter();
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const start = Date.now();
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      const pct = Math.min(elapsed / TOTAL_DURATION, 1);
+      setProgress(pct);
+
+      if (pct >= 1) {
+        clearInterval(interval);
+        setTimeout(() => router.push("/analysis/results"), 300);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [router]);
+
+  const progressPct = Math.round(progress * 100);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar activeLink="analysis" />
@@ -11,7 +60,7 @@ export default function AnalysisInProgress() {
       <main className="min-h-screen pt-32 pb-20 px-8 max-w-7xl mx-auto flex flex-col items-center">
         <header className="w-full mb-20 text-center">
           <h1 className="text-5xl md:text-7xl font-light tracking-tight mb-4">
-            Analyzing your <span className="italic">Mortgage Statement...</span>
+            Analyzing your <span className="italic">document...</span>
           </h1>
           <p className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant">
             Sequence ID: ARCH-4492-X
@@ -43,11 +92,14 @@ export default function AnalysisInProgress() {
                   Progress
                 </div>
                 <div className="w-64 h-[2px] bg-surface-container-high relative">
-                  <div className="absolute top-0 left-0 h-full bg-primary w-[65%]" />
+                  <div
+                    className="absolute top-0 left-0 h-full bg-primary transition-all duration-100"
+                    style={{ width: `${progressPct}%` }}
+                  />
                 </div>
               </div>
               <div className="text-[10px] font-label uppercase tracking-widest font-bold">
-                65% Complete
+                {progressPct}% Complete
               </div>
             </div>
           </div>
@@ -58,56 +110,57 @@ export default function AnalysisInProgress() {
                 Active Operations
               </h2>
               <ul className="space-y-6">
-                <li className="flex items-start gap-4 group">
-                  <span className="serif text-2xl leading-none text-primary">
-                    01
-                  </span>
-                  <div className="flex-1 border-b border-black/5 pb-4">
-                    <p className="font-label text-[11px] font-bold uppercase tracking-widest mb-1 flex justify-between items-center">
-                      Reading line items...
-                      <MaterialSymbol
-                        icon="check_circle"
-                        className="text-sm text-primary"
-                      />
-                    </p>
-                    <p className="text-[13px] text-on-surface-variant leading-relaxed">
-                      Extracting principal, interest, and escrow distributions
-                      from page 01.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4 group">
-                  <span className="serif text-2xl leading-none text-primary">
-                    02
-                  </span>
-                  <div className="flex-1 border-b border-black/5 pb-4">
-                    <p className="font-label text-[11px] font-bold uppercase tracking-widest mb-1 flex justify-between items-center">
-                      Comparing to tax records...
-                      <MaterialSymbol
-                        icon="sync"
-                        className="text-sm text-primary"
-                        filled
-                      />
-                    </p>
-                    <p className="text-[13px] text-on-surface-variant leading-relaxed">
-                      Cross-referencing municipal assessment with current escrow
-                      withholdings.
-                    </p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-4 group">
-                  <span className="serif text-2xl leading-none text-neutral-300">
-                    03
-                  </span>
-                  <div className="flex-1 border-b border-black/5 pb-4">
-                    <p className="font-label text-[11px] font-bold uppercase tracking-widest mb-1 text-neutral-400">
-                      Identifying discrepancy...
-                    </p>
-                    <p className="text-[13px] text-neutral-400 leading-relaxed italic">
-                      Awaiting data from previous sequence.
-                    </p>
-                  </div>
-                </li>
+                {steps.map((step) => {
+                  const done = progress >= step.completesAt;
+                  const active =
+                    !done &&
+                    progress >= (steps[steps.indexOf(step) - 1]?.completesAt ?? 0);
+
+                  return (
+                    <li key={step.num} className="flex items-start gap-4 group">
+                      <span
+                        className={`serif text-2xl leading-none transition-colors ${
+                          done || active ? "text-primary" : "text-neutral-300"
+                        }`}
+                      >
+                        {step.num}
+                      </span>
+                      <div className="flex-1 border-b border-black/5 pb-4">
+                        <p
+                          className={`font-label text-[11px] font-bold uppercase tracking-widest mb-1 flex justify-between items-center transition-colors ${
+                            done || active ? "" : "text-neutral-400"
+                          }`}
+                        >
+                          {step.label}
+                          {done && (
+                            <MaterialSymbol
+                              icon="check_circle"
+                              className="text-sm text-primary"
+                            />
+                          )}
+                          {active && (
+                            <MaterialSymbol
+                              icon="sync"
+                              className="text-sm text-primary"
+                              filled
+                            />
+                          )}
+                        </p>
+                        <p
+                          className={`text-[13px] leading-relaxed transition-colors ${
+                            done || active
+                              ? "text-on-surface-variant"
+                              : "text-neutral-400 italic"
+                          }`}
+                        >
+                          {done || active
+                            ? step.detail
+                            : "Awaiting data from previous sequence."}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
             <div className="bg-surface-container-lowest p-8 border-l-4 border-black">
