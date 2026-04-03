@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bill-ingual",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-03",
+  "account_id": "22bb00110b044861ce53a223ab39d1cf",
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
