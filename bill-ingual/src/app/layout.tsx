@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Inter, Newsreader } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const newsreader = Newsreader({ 
+  subsets: ['latin'], 
+  style: ['normal', 'italic'],
+  variable: '--font-newsreader',
+  adjustFontFallback: false,
+  display: 'swap'
+});
 
 export const metadata: Metadata = {
   title: "Bill-ingual",
@@ -16,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn("font-sans", inter.variable)}>
+    <html lang="en" className={cn(inter.variable, newsreader.variable)}>
       <head>
         <link
           rel="stylesheet"

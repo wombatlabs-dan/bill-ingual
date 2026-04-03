@@ -10,56 +10,79 @@ import Link from "next/link";
 
 const CONTENT = {
   mortgage: {
+    labels: {
+      breakdown: "EXPLAINER",
+      actions: "YOUR OPTIONS",
+    },
     bottomLine: (
       <>
         Your monthly payment is increasing by{" "}
-        <span className="text-primary">$244.00</span> effective next billing
-        cycle due to a shortfall in your escrow projections.
+        <span className="text-primary">$187.00</span> because your home&apos;s
+        value was reassessed, raising your property taxes.
       </>
     ),
     sections: [
       {
-        title: "ESCROW SHORTAGE",
+        title: "WHAT DOES THIS SAY?",
         body: (
           <>
-            Your property taxes rose higher than the bank predicted last year.
-            This creates a{" "}
-            <span className="font-semibold text-primary">&quot;shortage&quot;</span>{" "}
-            because your account doesn&apos;t have enough to cover the upcoming
-            tax bill. The bank is now collecting extra to catch up.
+            Escrow is a savings account your mortgage lender manages on your
+            behalf. Each month, part of your payment goes into this account, and
+            your lender uses it to pay your property taxes and homeowner&apos;s
+            insurance when they come due. Think of it like a piggy bank your
+            lender holds so you&apos;re never hit with a big lump-sum tax or
+            insurance bill.
           </>
         ),
       },
       {
-        title: "ADJUSTED PAYMENT",
-        comparison: { prev: "$1,850.00", next: "$2,094.00" },
+        title: "WHY SHOULD I CARE?",
+        body: (
+          <>
+            Your monthly payment increased $187 (from $1,800.42 to $1,987.14)
+            because Travis County reassessed your home&apos;s value from $285,000 to
+            $336,300 — an 18% jump. That raised your annual property tax by
+            $1,077. Your insurance also went up slightly. Because your escrow
+            account didn&apos;t have enough to cover the higher amounts, there&apos;s a
+            $347 shortage your lender needs to collect. This is normal — it
+            happens to most homeowners when property values change.
+          </>
+        ),
+      },
+      {
+        title: "PAYMENT COMPARISON",
+        comparison: { prev: "$1,800.42", next: "$1,987.14" },
       },
     ],
     actions: [
       {
         num: "01",
-        heading: "PAY SHORTAGE",
-        body: "Eliminate the $244 monthly increase by paying the lump sum shortage of $2,928 upfront. This keeps your payment at the current rate.",
-        cta: "PAY SHORTAGE",
+        heading: "OPTION A",
+        body: "Pay the $347 shortage as a lump sum now. Your new monthly payment drops to $1,958.",
+        cta: "PAY LUMP SUM",
         href: null,
       },
       {
         num: "02",
-        heading: "GET TEMPLATE",
-        body: "Your tax assessment seems abnormally high for your zip code. Generate a formal appeal letter to contest the valuation.",
-        cta: "GET TEMPLATE",
-        href: "/action-generator",
+        heading: "OPTION B (RECOMMENDED)",
+        body: "Spread the shortage over 12 months at $29/month. Your new monthly payment is $1,987. This is the easiest option — no upfront cost, and the monthly difference is small.",
+        cta: "SELECT OPTION B",
+        href: null,
       },
       {
         num: "03",
-        heading: "CHECK ELIGIBILITY",
-        body: "Current market rates are 1.2% lower than your note. You may be eligible for a streamline refinance to offset the tax increase.",
-        cta: "CHECK ELIGIBILITY",
+        heading: "PROTEST TAXES",
+        body: "You can file a free property tax protest with Travis County by May 15. Protests succeed about 50% of the time in Texas. If your reassessment gets reduced, your payment could come back down.",
+        cta: "VIEW PROTEST GUIDE",
         href: null,
       },
     ],
   },
   medical: {
+    labels: {
+      breakdown: "TRANSLATION / BREAKDOWN",
+      actions: "RECOMMENDED ACTIONS",
+    },
     bottomLine: (
       <>
         You were overbilled by{" "}
@@ -134,7 +157,7 @@ function AnalysisResultsInner() {
           <div className="lg:col-span-7 space-y-16">
             <div>
               <h2 className="font-sans text-[10px] uppercase tracking-[0.3em] text-outline mb-10 border-b border-black/5 pb-2">
-                TRANSLATION / BREAKDOWN
+                {content.labels.breakdown}
               </h2>
               <div className="space-y-12">
                 {content.sections.map((section) => (
@@ -177,7 +200,7 @@ function AnalysisResultsInner() {
           <div className="lg:col-span-5">
             <div className="sticky top-32">
               <h2 className="font-sans text-[10px] uppercase tracking-[0.3em] text-outline mb-10 border-b border-black/5 pb-2">
-                RECOMMENDED ACTIONS
+                {content.labels.actions}
               </h2>
               <div className="space-y-12">
                 {content.actions.map((action) => (

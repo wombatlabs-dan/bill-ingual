@@ -1,11 +1,8 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
-  darkMode: "class",
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -95,12 +92,13 @@ const config: Config = {
         full: "9999px",
       },
       fontFamily: {
-        headline: ["Newsreader", "serif"],
-        body: ["Inter", "sans-serif"],
-        label: ["Inter", "sans-serif"],
+        sans: ["var(--font-sans)", "sans-serif"],
+        serif: ["var(--font-newsreader)", "serif"],
+        headline: ["var(--font-newsreader)", "serif"],
+        body: ["var(--font-sans)", "sans-serif"],
+        label: ["var(--font-sans)", "sans-serif"],
       },
     },
   },
   plugins: [],
-};
-export default config;
+}

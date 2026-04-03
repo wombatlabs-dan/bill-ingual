@@ -1,244 +1,140 @@
 "use client";
 
-import { useRef } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import MaterialSymbol from "@/components/MaterialSymbol";
 
-export default function UploadDocument() {
-  const router = useRouter();
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  function detectDoc(filename: string): string {
-    const lower = filename.toLowerCase();
-    if (lower.includes("medical")) return "medical";
-    if (lower.includes("mortgage")) return "mortgage";
-    return "mortgage";
-  }
-
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.files && e.target.files.length > 0) {
-      const doc = detectDoc(e.target.files[0].name);
-      router.push(`/analysis?doc=${doc}`);
-    }
-  }
-
-  function handleDrop(e: React.DragEvent<HTMLDivElement>) {
-    e.preventDefault();
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const doc = detectDoc(e.dataTransfer.files[0].name);
-      router.push(`/analysis?doc=${doc}`);
-    }
-  }
-
-  function handleDragOver(e: React.DragEvent<HTMLDivElement>) {
-    e.preventDefault();
-  }
-
+export default function HeroLanding() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="hidden"
-        onChange={handleFileChange}
-      />
-
-      <main className="flex-1 pt-32 pb-20 px-6 max-w-7xl mx-auto">
-        <header className="mb-16 md:mb-24">
-          <h1 className="text-5xl md:text-8xl font-light tracking-tight mb-6">
-            Clarity from <span className="italic">complexity.</span>
-          </h1>
-          <p className="font-body text-lg md:text-xl text-on-surface-variant max-w-2xl leading-relaxed">
-            Upload your confusing financial documents. Our architecture extracts
-            the truth behind the jargon, giving you a clear view of your
-            financial health.
-          </p>
-        </header>
-
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-32">
-          <div className="lg:col-span-8 group">
-            <div
-              className="relative aspect-[16/9] md:aspect-[21/9] bg-surface-container-lowest border border-outline-variant/30 flex flex-col items-center justify-center p-12 transition-all hover:bg-surface-container-low cursor-pointer"
-              onDrop={handleDrop}
-              onDragOver={handleDragOver}
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://lh3.googleusercontent.com/aida-public/AB6AXuAl3UpYVSynjM9d-HMdqfDg-297iS1QfAvh_XX1Qz6HUnVY7LLM0Y8tK6-ZygnSp7LcwMKG5VnVvenHYxYBlB63QJbEg7LKM9qfzYtjxM8N9Lr4TwuQWHeX4GGNUNAe92mckU5b1sZLzYaatQxdUlRpXK5JIXJ-_BhDQKfhb5nEsREpxOv4-BjefJBQH6z0Zq_IXrkacMhSUFVCsqH59nAe31Ag1ChlOZDkOZvNVwwLek4HrbGdu8a0is6cSX90IOegbFUsQuoepwE')] bg-cover bg-center" />
-              <MaterialSymbol
-                icon="description"
-                className="text-5xl mb-6 text-primary"
-              />
-              <h2 className="serif text-3xl mb-4 text-center">
-                Drag and Drop your confusing document here
-              </h2>
-              <p className="font-body text-xs tracking-widest uppercase text-outline mb-8">
-                PDF, JPG, PNG (Max 50MB)
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative min-h-[921px] flex flex-col justify-center px-6 md:px-12 py-24 overflow-hidden">
+          <div className="max-w-screen-2xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <div className="lg:col-span-7 space-y-12">
+              <div className="space-y-6">
+                <span className="inline-block px-3 py-1 bg-surface-container-highest text-[10px] font-bold tracking-[0.2em] uppercase">
+                  Intelligence First Analysis
+                </span>
+                <h1 className="text-6xl md:text-8xl lg:text-[7rem] leading-[0.9] font-black tracking-tighter text-primary">
+                  Financial Clarity,<br />
+                  <span className="italic font-normal">Curated by Intelligence.</span>
+                </h1>
+              </div>
+              <p className="text-xl md:text-2xl text-on-surface-variant max-w-2xl leading-relaxed">
+                Upload your most complex financial documents. Bill-ingual extracts the truth behind the jargon, delivering a plain-language breakdown and actionable next steps.
               </p>
-              <button
-                className="bg-primary text-on-primary px-10 py-4 text-xs font-bold tracking-[0.3em] uppercase hover:bg-primary-container transition-all flex items-center gap-3"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  fileInputRef.current?.click();
-                }}
-              >
-                SELECT FILE
-              </button>
+              <div className="flex flex-wrap gap-8 items-center pt-4">
+                <Link href="/upload" className="bg-primary text-on-primary px-10 py-5 text-sm tracking-widest uppercase font-extrabold hover:bg-primary-container transition-all duration-300 active:scale-[0.98] text-center">
+                  Analyze a Document
+                </Link>
+                <Link href="#" className="text-sm font-bold tracking-widest uppercase border-b-2 border-primary pb-1 hover:border-outline transition-colors">
+                  View Sample Analysis
+                </Link>
+              </div>
             </div>
-            <div className="mt-6 flex justify-between items-center px-2">
-              <p className="font-body text-[10px] uppercase tracking-widest text-outline">
-                SECURE ENCRYPTED UPLOAD
-              </p>
-              <div className="flex gap-4">
-                <MaterialSymbol icon="lock" className="text-sm text-outline" />
-                <MaterialSymbol
-                  icon="verified_user"
-                  className="text-sm text-outline"
+            <div className="lg:col-span-5 relative">
+              <div className="aspect-[4/5] bg-surface-container overflow-hidden">
+                <img
+                  className="w-full h-full object-cover grayscale brightness-95 contrast-110"
+                  alt="Minimalist architectural photograph of clean concrete angles and dramatic shadows, symbolizing structural clarity and financial foundations"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ2o0sXvxovPC0adoGbxUFkzbzaLShCc1CDsBO49YqM6VOZwxzyqr7NRRDIA_cwWID02aXfuXkTXgVfKORNBh6jc-cJfoCuDfJ4acb-FX5mkBEe2iH4Kos2HATMY6cnolaBY00ldE5WoCatTB0NQdJGn26Zu6adhZcf9X2IH00dhA9Wx-llhqvZgNyU59DHqTPwVPjxzSwvLSy91Q9nt8vmYSNZN3wT6e3YejC8GxUThBDDgjs3mQjKY58V55ZleXJVb5p_StDV-0"
                 />
               </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-4 space-y-12 pt-4">
-            <div>
-              <h3 className="font-body text-[10px] font-black tracking-[0.2em] uppercase text-primary mb-6">
-                WHAT WE DECODE
-              </h3>
-              <div className="space-y-8">
-                <div className="group border-b border-outline-variant/20 pb-4">
-                  <span className="serif text-2xl block mb-1">
-                    Mortgage Statements
-                  </span>
-                  <p className="text-on-surface-variant text-sm font-body">
-                    Break down principal, interest, and escrow distributions.
-                  </p>
-                </div>
-                <div className="group border-b border-outline-variant/20 pb-4">
-                  <span className="serif text-2xl block mb-1">
-                    Medical Bills
-                  </span>
-                  <p className="text-on-surface-variant text-sm font-body">
-                    Identify billing errors and unexplained provider codes.
-                  </p>
-                </div>
-                <div className="group border-b border-outline-variant/20 pb-4">
-                  <span className="serif text-2xl block mb-1">
-                    Insurance EOBs
-                  </span>
-                  <p className="text-on-surface-variant text-sm font-body">
-                    Verify what you truly owe versus what is pending.
-                  </p>
-                </div>
+              <div className="absolute -bottom-8 -left-8 bg-surface p-8 max-w-[280px] shadow-2xl border border-outline-variant/10">
+                <p className="font-headline italic text-2xl mb-4">&quot;The strongest lever for the modern consumer.&quot;</p>
+                <p className="text-[10px] tracking-widest uppercase font-bold text-on-surface-variant">— Global Finance Review</p>
               </div>
-            </div>
-
-            <div className="bg-primary text-on-primary p-8">
-              <MaterialSymbol
-                icon="auto_awesome"
-                className="text-3xl mb-4"
-              />
-              <p className="serif text-xl italic mb-4 leading-snug">
-                &quot;The Architect found $400 in over-billed insurance premiums in
-                under 30 seconds.&quot;
-              </p>
-              <p className="font-body text-[10px] uppercase tracking-widest opacity-60">
-                — Quarterly Report, 2024
-              </p>
             </div>
           </div>
         </section>
 
-        <section className="mb-32">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
-              <span className="font-body text-[10px] font-black tracking-[0.2em] uppercase text-primary block mb-4">
-                GALLERY
+        {/* The Three-Layer Approach */}
+        <section className="py-32 px-6 md:px-12 bg-surface-container-low">
+          <div className="max-w-screen-2xl mx-auto">
+            <div className="mb-24 space-y-4">
+              <span className="text-[10px] tracking-[0.3em] uppercase font-bold text-on-surface-variant">
+                The Methodology
               </span>
-              <h2 className="serif text-4xl md:text-5xl">
-                Our Recent Analysis
-              </h2>
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tight">The Three-Layer Approach</h2>
             </div>
-            <a
-              href="#"
-              className="font-body text-[10px] font-bold tracking-[0.2em] uppercase border-b-2 border-primary pb-1"
-            >
-              VIEW ALL ARCHIVES
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
-            <div className="bg-surface-container-low aspect-square overflow-hidden relative group">
-              <Image
-                fill
-                className="object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                alt="Close-up of a complex financial document with architectural redline annotations"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFSWKwvRyvvAf40r-5upP8ZXcgX091wpnSOR7D4yeJ37Fz30M96aHNRpt6odTzoOw-pGneGLJu36WFj_-0J_auL8e3vT6X5NnKl2KF97DJgYplDRhTZFiVialNuZaR_nmnn8MoJUoeoabhODOu42UAGwmH_s1i0cTu0XjY1zUUIKYj_HghXnaUyiNpZ4rQ_qYRUEe--Lu6Z5qIj1rIlN8JmoLHCdTLbhaavqyIn9G1BFVyvRaEyvL7JBZgXxjbqwEYhX5eiKkDui4"
-              />
-              <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/60 to-transparent w-full">
-                <span className="text-white font-body text-[10px] uppercase tracking-[0.2em]">
-                  Sample Analysis
-                </span>
-                <p className="text-white serif text-xl italic">
-                  Premium Mortgage Audit
-                </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-outline-variant/20">
+              <div className="p-12 md:p-16 bg-surface hover:bg-surface-container-lowest transition-colors group">
+                <span className="font-headline text-5xl md:text-7xl italic text-outline-variant mb-12 block group-hover:text-primary transition-colors">01</span>
+                <h3 className="text-2xl font-bold mb-6">What it says.</h3>
+                <p className="text-on-surface-variant leading-relaxed">Absolute transparency. We translate dense legal and financial terminology into a narrative format that anyone can understand instantly.</p>
               </div>
-            </div>
-
-            <div className="bg-surface-container-low aspect-square overflow-hidden relative group">
-              <Image
-                fill
-                className="object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                alt="High-contrast black and white photograph of a medical invoice"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCypwNI5ELNZvfE1VlN1xyiVFsxXXKwBadingK846KAKVwAvCFVfk-3Qqqp19e6XhZCLNLukoul7Gp4hM8Ri1tzvruqbbskce9qgrGqitUMSNLDHMeiH6M75ZdsAd8fhTgXuNMf9e4FRtrx1rmqwAEiehFUQ92-DvemREZwXNfMwdXwhUBkj9pY1bzOdoFgKnosIDy7tSCsktH9IGRej7n0i3euDoohIYPrMtH4Saho3Dreh6bJoCgTj3fiHSCJfDKiSbZodzLaYGA"
-              />
-              <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/60 to-transparent w-full">
-                <span className="text-white font-body text-[10px] uppercase tracking-[0.2em]">
-                  Sample Analysis
-                </span>
-                <p className="text-white serif text-xl italic">
-                  Insurance Claim Review
-                </p>
+              <div className="p-12 md:p-16 bg-surface hover:bg-surface-container-lowest transition-colors group border-y md:border-y-0 md:border-x border-outline-variant/20">
+                <span className="font-headline text-5xl md:text-7xl italic text-outline-variant mb-12 block group-hover:text-primary transition-colors">02</span>
+                <h3 className="text-2xl font-bold mb-6">Why it matters.</h3>
+                <p className="text-on-surface-variant leading-relaxed">Contextual analysis. Our intelligence engines cross-reference market data to tell you how this document impacts your net worth and liabilities.</p>
               </div>
-            </div>
-
-            <div className="bg-surface-container-low aspect-square overflow-hidden relative group">
-              <Image
-                fill
-                className="object-cover grayscale opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                alt="Minimalist layout showing a blurred bank statement"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUpoUNqZsxMcdEL6L5IvYZ2pj_aQY25Lj-11RQMq4xvcDWoDRS0i0Fy5RyYSNJC8j7Tmk0Z8xQwPUGxyipt96gE5aUD6YHat-t80Vem7U7JHnlsCGbdNYjWG-xOERPH6jqGvb3pz1owqzDjAjMUplos-HYWVLQAmgZ2iKnZohHkoTE1TqQOJ0lispt0J8M2W0utRW2hx4Gvh0JSS8bVwJVKizwObok7ArHyLtzh7K0Y-nlb6zaIEQum3mnJ3CMFjv1g2YOEO4fxYg"
-              />
-              <div className="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-black/60 to-transparent w-full">
-                <span className="text-white font-body text-[10px] uppercase tracking-[0.2em]">
-                  Sample Analysis
-                </span>
-                <p className="text-white serif text-xl italic">
-                  Monthly Wealth Digest
-                </p>
+              <div className="p-12 md:p-16 bg-surface hover:bg-surface-container-lowest transition-colors group">
+                <span className="font-headline text-5xl md:text-7xl italic text-outline-variant mb-12 block group-hover:text-primary transition-colors">03</span>
+                <h3 className="text-2xl font-bold mb-6">What to do.</h3>
+                <p className="text-on-surface-variant leading-relaxed">Tactical execution. We provide a prioritized list of actions, from dispute letters to refinancing opportunities, tailored to your specific case.</p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="border-t-4 border-primary pt-16 mb-32 text-center">
-          <h2 className="serif text-5xl md:text-7xl mb-8">
-            Ready to see the <span className="italic">numbers?</span>
-          </h2>
-          <div className="flex flex-col md:flex-row justify-center items-center gap-6">
-            <button
-              className="bg-primary text-on-primary px-12 py-5 text-sm font-bold tracking-[0.3em] uppercase hover:bg-primary-container transition-all"
-              onClick={() => fileInputRef.current?.click()}
-            >
-              SCAN DOCUMENT NOW
-            </button>
-            <button className="text-primary px-12 py-5 text-sm font-bold tracking-[0.3em] uppercase border border-outline-variant/30 hover:bg-surface-container transition-all">
-              VIEW DASHBOARD
-            </button>
+        {/* Use Cases */}
+        <section className="py-32 px-6 md:px-12 bg-primary text-on-primary">
+          <div className="max-w-screen-2xl mx-auto">
+            <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-24">
+              <div className="max-w-2xl space-y-6">
+                <span className="text-[10px] tracking-[0.3em] uppercase font-bold text-on-primary-fixed-variant">Utility & Versatility</span>
+                <h2 className="text-4xl md:text-7xl font-bold tracking-tight">Structured for every financial complexity.</h2>
+              </div>
+              <div className="hidden lg:block pb-4">
+                <span className="material-symbols-outlined text-6xl opacity-20">architecture</span>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+              <div className="space-y-8">
+                <div className="aspect-video bg-primary-container relative overflow-hidden">
+                  <img className="w-full h-full object-cover opacity-60 grayscale" alt="Close-up of modern architectural blueprints with high-contrast lighting and technical details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdfQGMLryTMgSnA_oP9Rd1bKam5qIWdiY_8wMGoyY2RMJMcuFRF_o9sphKOwOagiyWGbc3hx0xY7_RdTqf_sI4Z6CWbbt9Y4M0pKudSLr8Whfk-tNDnCQmfm6J5dlgS3vuBOm8nC7raYDhBMVn_IqRpsuawqlqoy91PCkMNH60Dx9JlUc-VGoScSM5RjyMgUaLa_Zgb146DXC5ZwoeudcKUlB5tAKbQc8z0lxG24z4v_Amu_wdPUERzXN_1chQWRGAql2hr48gxhU"/>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-sm tracking-widest uppercase font-black">Mortgage Statements</h4>
+                  <p className="text-on-primary/60 leading-relaxed text-sm">Decode escrow adjustments, principal allocation, and interest rate benchmarks without calling a broker.</p>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <div className="aspect-video bg-primary-container relative overflow-hidden">
+                  <img className="w-full h-full object-cover opacity-60 grayscale" alt="Abstract composition of glass and steel skyscraper reflecting the sky, sharp lines and professional aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM47r6QlO3Osz4zqNAlldmboSzvGkpf8-QTFyawpa6V8I2UsctnxoEZp77hvPY4JoB_n88CqnT-E_PeIBQU2WzoBM-IJNKqzNoUsFWrtCFmj0Pot_AE5zKJtGCGeVBHYNWlnz28vVpQatu-ihd2dWSRnLr87PetzHqoCeefVbM2cTNvgtIUnBWjjEFkj8V41q1PsKBPYR1yrQy0JiBkV80uUo3Kku4I3nq06Y0fWzt9G7AiU97aBGLjFMBfKca8jQrtnWgDMc4ZjY"/>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-sm tracking-widest uppercase font-black">Medical Bills</h4>
+                  <p className="text-on-primary/60 leading-relaxed text-sm">Automated CPT code verification to identify billing errors and inflated provider charges before you pay a cent.</p>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <div className="aspect-video bg-primary-container relative overflow-hidden">
+                  <img className="w-full h-full object-cover opacity-60 grayscale" alt="Dark dramatic image of a high-end fountain pen resting on a heavy paper document with rich ink textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv6ZQmjW1GpcZCHXablE2Sl7azqTizF7Hj8LH1Rn46Z_FFuEzXTa_XnuDFoY5TGjkQEFD7bnt_FR2NLGW0r_ZOaTTQAgUbrPGb6wI_Cbv_sxDtwT7sWjCZGxchtkc6D4qeg5gE05UPcO3iHpevXoUNjENsWd1CByhoWn43_iALxZDFbeX9BnOav28i1N6F4VibOCAqKQ92ECmobfYnGQy508RZFi2t45yipJyApqIy-AMMBuvPM2G3zrUchkzPuIuuh9E-B7kqQ5E"/>
+                </div>
+                <div className="space-y-4">
+                  <h4 className="text-sm tracking-widest uppercase font-black">Insurance EOBs</h4>
+                  <p className="text-on-primary/60 leading-relaxed text-sm">Understand your Explanation of Benefits. Map deductibles and out-of-pocket maximums with total precision.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Social Proof Pull Quote */}
+        <section className="py-48 px-6 md:px-12 bg-surface">
+          <div className="max-w-4xl mx-auto text-center space-y-12">
+            <span className="material-symbols-outlined text-4xl text-primary">format_quote</span>
+            <blockquote className="text-4xl md:text-6xl font-headline italic leading-tight text-on-surface">
+              &quot;Bill-ingual isn&apos;t just a tool; it&apos;s the intellectual barrier between the consumer and the complexity of the financial industry.&quot;
+            </blockquote>
+            <div className="pt-8">
+              <div className="h-px w-24 bg-primary mx-auto mb-8"></div>
+              <p className="text-xs tracking-[0.4em] uppercase font-extrabold">Executive Insight Quarterly</p>
+            </div>
           </div>
         </section>
       </main>

@@ -9,31 +9,59 @@ import MaterialSymbol from "@/components/MaterialSymbol";
 
 const TOTAL_DURATION = 4000; // ms
 
-const steps = [
-  {
-    num: "01",
-    label: "Reading line items...",
-    detail: "Extracting principal, interest, and escrow distributions from page 01.",
-    completesAt: 0.3,
-  },
-  {
-    num: "02",
-    label: "Comparing to tax records...",
-    detail: "Cross-referencing municipal assessment with current escrow withholdings.",
-    completesAt: 0.65,
-  },
-  {
-    num: "03",
-    label: "Identifying discrepancy...",
-    detail: "Flagging anomalies and preparing your plain-language breakdown.",
-    completesAt: 1.0,
-  },
-];
+const STEPS = {
+  mortgage: [
+    {
+      num: "01",
+      label: "Analyzing tax assessment...",
+      detail:
+        "Cross-referencing Travis County valuation with historical escrow distributions.",
+      completesAt: 0.3,
+    },
+    {
+      num: "02",
+      label: "Projecting escrow options...",
+      detail:
+        "Calculating lump-sum vs. monthly shortage repayment benefits.",
+      completesAt: 0.65,
+    },
+    {
+      num: "03",
+      label: "Simplifying the breakdown...",
+      detail:
+        "Translating complex financial jargon into plain-language recommendations.",
+      completesAt: 1.0,
+    },
+  ],
+  medical: [
+    {
+      num: "01",
+      label: "Reading line items...",
+      detail:
+        "Extracting clinical procedure codes and provider billing metadata.",
+      completesAt: 0.3,
+    },
+    {
+      num: "02",
+      label: "Cross-referencing EOB...",
+      detail:
+        "Matching billed charges against insurance carrier payment records.",
+      completesAt: 0.65,
+    },
+    {
+      num: "03",
+      label: "Identifying discrepancy...",
+      detail: "Flagging anomalies and preparing your formal dispute strategy.",
+      completesAt: 1.0,
+    },
+  ],
+};
 
 function AnalysisInProgressInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const doc = searchParams.get("doc") ?? "mortgage";
+  const doc = (searchParams.get("doc") ?? "mortgage") as keyof typeof STEPS;
+  const steps = STEPS[doc] ?? STEPS.mortgage;
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -65,7 +93,7 @@ function AnalysisInProgressInner() {
             Analyzing your <span className="italic">document...</span>
           </h1>
           <p className="font-label text-[10px] uppercase tracking-[0.3em] text-on-surface-variant">
-            Sequence ID: ARCH-4492-X
+            Sequence ID: BILL-4492-X
           </p>
         </header>
 
@@ -170,7 +198,7 @@ function AnalysisInProgressInner() {
                 &quot;Precision in audit is the foundation of structural wealth.&quot;
               </p>
               <p className="mt-4 font-label text-[9px] uppercase tracking-widest text-on-surface-variant">
-                — The Architect&apos;s Handbook, 1924
+                — The Bill-ingual Handbook, 1924
               </p>
             </div>
           </div>

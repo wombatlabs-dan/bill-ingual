@@ -47,11 +47,11 @@ Account #MED-2026-00341 | Insurance ID: BCBS-TX-4421839`;
         <div className="max-w-[1600px] mx-auto px-8 py-12">
           <div className="mb-16">
             <h1 className="serif text-5xl md:text-7xl font-light tracking-tight text-primary mb-4 italic">
-              Action Generator
+              Resolution Blueprint
             </h1>
             <div className="flex items-center gap-4">
               <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">
-                Resolution Strategy
+                Strategic Framework
               </span>
               <div className="h-px w-24 bg-primary/10" />
               <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-primary">
