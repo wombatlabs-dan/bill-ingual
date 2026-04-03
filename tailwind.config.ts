@@ -10,6 +10,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        border: "var(--border)",
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        card: {
+          DEFAULT: "var(--card)",
+          foreground: "var(--card-foreground)",
+        },
+        popover: {
+          DEFAULT: "var(--popover)",
+          foreground: "var(--popover-foreground)",
+        },
+        primary: {
+          DEFAULT: "var(--primary)",
+          foreground: "var(--primary-foreground)",
+        },
+        secondary: {
+          DEFAULT: "var(--secondary)",
+          foreground: "var(--secondary-foreground)",
+        },
+        muted: {
+          DEFAULT: "var(--muted)",
+          foreground: "var(--muted-foreground)",
+        },
+        accent: {
+          DEFAULT: "var(--accent)",
+          foreground: "var(--accent-foreground)",
+        },
+        destructive: {
+          DEFAULT: "var(--destructive)",
+          foreground: "var(--destructive-foreground)",
+        },
+        input: "var(--input)",
+        ring: "var(--ring)",
         outline: "#777777",
         "on-background": "#1a1c1c",
         "on-tertiary-fixed-variant": "#e2e2e2",
@@ -21,7 +54,6 @@ const config: Config = {
         "primary-fixed-dim": "#474747",
         "tertiary-container": "#747474",
         "surface-dim": "#dadada",
-        background: "#f9f9f9",
         "surface-container-low": "#f3f3f4",
         "tertiary-fixed-dim": "#474747",
         "secondary-container": "#d6d4d3",
@@ -36,7 +68,6 @@ const config: Config = {
         "inverse-primary": "#c6c6c6",
         "surface-bright": "#f9f9f9",
         "on-tertiary-container": "#ffffff",
-        secondary: "#5f5e5e",
         "secondary-fixed": "#c8c6c6",
         "secondary-fixed-dim": "#acabab",
         "on-primary-container": "#ffffff",
@@ -46,7 +77,6 @@ const config: Config = {
         "on-error": "#ffffff",
         "inverse-surface": "#2f3131",
         "surface-variant": "#e2e2e2",
-        primary: "#000000",
         "on-primary-fixed": "#ffffff",
         "primary-container": "#3b3b3b",
         error: "#ba1a1a",
