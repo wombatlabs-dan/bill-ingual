@@ -1,14 +1,121 @@
 "use client";
 
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MaterialSymbol from "@/components/MaterialSymbol";
 import Link from "next/link";
 
-export default function AnalysisResults() {
+const CONTENT = {
+  mortgage: {
+    bottomLine: (
+      <>
+        Your monthly payment is increasing by{" "}
+        <span className="text-primary">$244.00</span> effective next billing
+        cycle due to a shortfall in your escrow projections.
+      </>
+    ),
+    sections: [
+      {
+        title: "ESCROW SHORTAGE",
+        body: (
+          <>
+            Your property taxes rose higher than the bank predicted last year.
+            This creates a{" "}
+            <span className="font-semibold text-primary">&quot;shortage&quot;</span>{" "}
+            because your account doesn&apos;t have enough to cover the upcoming
+            tax bill. The bank is now collecting extra to catch up.
+          </>
+        ),
+      },
+      {
+        title: "ADJUSTED PAYMENT",
+        comparison: { prev: "$1,850.00", next: "$2,094.00" },
+      },
+    ],
+    actions: [
+      {
+        num: "01",
+        heading: "PAY SHORTAGE",
+        body: "Eliminate the $244 monthly increase by paying the lump sum shortage of $2,928 upfront. This keeps your payment at the current rate.",
+        cta: "PAY SHORTAGE",
+        href: null,
+      },
+      {
+        num: "02",
+        heading: "GET TEMPLATE",
+        body: "Your tax assessment seems abnormally high for your zip code. Generate a formal appeal letter to contest the valuation.",
+        cta: "GET TEMPLATE",
+        href: "/action-generator",
+      },
+      {
+        num: "03",
+        heading: "CHECK ELIGIBILITY",
+        body: "Current market rates are 1.2% lower than your note. You may be eligible for a streamline refinance to offset the tax increase.",
+        cta: "CHECK ELIGIBILITY",
+        href: null,
+      },
+    ],
+  },
+  medical: {
+    bottomLine: (
+      <>
+        You were overbilled by{" "}
+        <span className="text-primary">$312.00</span> — a duplicate procedure
+        code your insurance already paid in full.
+      </>
+    ),
+    sections: [
+      {
+        title: "DUPLICATE BILLING",
+        body: (
+          <>
+            CPT code 99213 appears twice on this bill. Your insurer paid the
+            first charge; the second is a{" "}
+            <span className="font-semibold text-primary">billing error</span>.
+            You are not responsible for this amount and can formally dispute it.
+          </>
+        ),
+      },
+      {
+        title: "AMOUNT BREAKDOWN",
+        comparison: { prev: "Billed: $624.00", next: "You owe: $0.00" },
+      },
+    ],
+    actions: [
+      {
+        num: "01",
+        heading: "DISPUTE LETTER",
+        body: "Generate a pre-filled dispute letter citing the duplicate CPT code and your insurer's EOB reference number to send to the billing department.",
+        cta: "GET DISPUTE LETTER",
+        href: "/action-generator",
+      },
+      {
+        num: "02",
+        heading: "CALL SCRIPT",
+        body: "Use this step-by-step script when calling the provider's billing line. Ask for a corrected claim (CMS-1500) and a written confirmation of the adjustment.",
+        cta: "GET CALL SCRIPT",
+        href: "/action-generator",
+      },
+      {
+        num: "03",
+        heading: "CHECK EOB",
+        body: "Your Explanation of Benefits confirms this charge was paid at 100%. Keep this document — attach it to your dispute as supporting evidence.",
+        cta: "VIEW CHECKLIST",
+        href: null,
+      },
+    ],
+  },
+};
+
+function AnalysisResultsInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const docType = (searchParams.get("doc") ?? "mortgage") as keyof typeof CONTENT;
+  const content = CONTENT[docType] ?? CONTENT.mortgage;
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar activeLink="analysis" />
@@ -19,9 +126,7 @@ export default function AnalysisResults() {
             THE BOTTOM LINE
           </p>
           <h1 className="serif italic text-5xl md:text-7xl leading-[1.1] max-w-4xl tracking-tight">
-            &quot;Your monthly payment is increasing by{" "}
-            <span className="text-primary">$244.00</span> effective next billing
-            cycle due to a shortfall in your escrow projections.&quot;
+            &quot;{content.bottomLine}&quot;
           </h1>
         </section>
 
@@ -32,51 +137,41 @@ export default function AnalysisResults() {
                 TRANSLATION / BREAKDOWN
               </h2>
               <div className="space-y-12">
-                <div className="group">
-                  <h3 className="font-sans font-bold text-sm tracking-widest uppercase mb-4">
-                    ESCROW SHORTAGE
-                  </h3>
-                  <div className="bg-surface-container-low p-8 border-l-4 border-primary">
-                    <p className="text-lg leading-relaxed font-light text-on-surface-variant">
-                      Your property taxes rose higher than the bank predicted
-                      last year. This creates a{" "}
-                      <span className="font-semibold text-primary">
-                        &quot;shortage&quot;
-                      </span>{" "}
-                      because your account doesn&apos;t have enough to cover the
-                      upcoming tax bill. The bank is now collecting extra to
-                      catch up.
-                    </p>
+                {content.sections.map((section) => (
+                  <div key={section.title} className="group">
+                    <h3 className="font-sans font-bold text-sm tracking-widest uppercase mb-4">
+                      {section.title}
+                    </h3>
+                    {"body" in section ? (
+                      <div className="bg-surface-container-low p-8 border-l-4 border-primary">
+                        <p className="text-lg leading-relaxed font-light text-on-surface-variant">
+                          {section.body}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div className="bg-surface-container-high p-8">
+                          <span className="block text-[10px] uppercase tracking-widest text-outline mb-2">
+                            Before
+                          </span>
+                          <span className="text-3xl font-bold tracking-tighter">
+                            {section.comparison!.prev}
+                          </span>
+                        </div>
+                        <div className="bg-primary text-on-primary p-8 shadow-2xl">
+                          <span className="block text-[10px] uppercase tracking-widest text-on-primary/60 mb-2">
+                            After
+                          </span>
+                          <span className="text-3xl font-bold tracking-tighter">
+                            {section.comparison!.next}
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                </div>
-
-                <div className="group">
-                  <h3 className="font-sans font-bold text-sm tracking-widest uppercase mb-4">
-                    ADJUSTED PAYMENT
-                  </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="bg-surface-container-high p-8">
-                      <span className="block text-[10px] uppercase tracking-widest text-outline mb-2">
-                        Previous Payment
-                      </span>
-                      <span className="text-3xl font-bold tracking-tighter">
-                        $1,850.00
-                      </span>
-                    </div>
-                    <div className="bg-primary text-on-primary p-8 shadow-2xl">
-                      <span className="block text-[10px] uppercase tracking-widest text-on-primary/60 mb-2">
-                        New Payment
-                      </span>
-                      <span className="text-3xl font-bold tracking-tighter">
-                        $2,094.00
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
-
-
           </div>
 
           <div className="lg:col-span-5">
@@ -85,64 +180,32 @@ export default function AnalysisResults() {
                 RECOMMENDED ACTIONS
               </h2>
               <div className="space-y-12">
-                <div className="flex gap-6">
-                  <span className="serif italic text-4xl text-outline/30 leading-none">
-                    01
-                  </span>
-                  <div className="space-y-4 flex-1">
-                    <h4 className="font-bold tracking-tight text-xl uppercase italic">
-                      PAY SHORTAGE
-                    </h4>
-                    <p className="text-sm text-on-surface-variant leading-relaxed">
-                      Eliminate the $244 monthly increase by paying the lump sum
-                      shortage of $2,928 upfront. This keeps your payment at the
-                      current rate.
-                    </p>
-                    <button className="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
-                      PAY SHORTAGE
-                    </button>
+                {content.actions.map((action) => (
+                  <div key={action.num} className="flex gap-6">
+                    <span className="serif italic text-4xl text-outline/30 leading-none">
+                      {action.num}
+                    </span>
+                    <div className="space-y-4 flex-1">
+                      <h4 className="font-bold tracking-tight text-xl uppercase italic">
+                        {action.heading}
+                      </h4>
+                      <p className="text-sm text-on-surface-variant leading-relaxed">
+                        {action.body}
+                      </p>
+                      {action.href ? (
+                        <Link href={action.href}>
+                          <button className="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                            {action.cta}
+                          </button>
+                        </Link>
+                      ) : (
+                        <button className="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                          {action.cta}
+                        </button>
+                      )}
+                    </div>
                   </div>
-                </div>
-
-                <div className="flex gap-6">
-                  <span className="serif italic text-4xl text-outline/30 leading-none">
-                    02
-                  </span>
-                  <div className="space-y-4 flex-1">
-                    <h4 className="font-bold tracking-tight text-xl uppercase italic">
-                      GET TEMPLATE
-                    </h4>
-                    <p className="text-sm text-on-surface-variant leading-relaxed">
-                      Your tax assessment seems abnormally high for your zip
-                      code. Generate a formal appeal letter to contest the
-                      valuation.
-                    </p>
-                    <Link href="/action-generator">
-                      <button className="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
-                        GET TEMPLATE
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="flex gap-6">
-                  <span className="serif italic text-4xl text-outline/30 leading-none">
-                    03
-                  </span>
-                  <div className="space-y-4 flex-1">
-                    <h4 className="font-bold tracking-tight text-xl uppercase italic">
-                      CHECK ELIGIBILITY
-                    </h4>
-                    <p className="text-sm text-on-surface-variant leading-relaxed">
-                      Current market rates are 1.2% lower than your note. You
-                      may be eligible for a streamline refinance to offset the
-                      tax increase.
-                    </p>
-                    <button className="w-full py-4 border border-primary text-primary font-bold text-[10px] tracking-[0.2em] uppercase hover:bg-primary hover:text-on-primary transition-colors">
-                      CHECK ELIGIBILITY
-                    </button>
-                  </div>
-                </div>
+                ))}
               </div>
 
               <div className="mt-16 pt-16 border-t border-black/5">
@@ -166,5 +229,13 @@ export default function AnalysisResults() {
 
       <Footer />
     </div>
+  );
+}
+
+export default function AnalysisResults() {
+  return (
+    <Suspense>
+      <AnalysisResultsInner />
+    </Suspense>
   );
 }

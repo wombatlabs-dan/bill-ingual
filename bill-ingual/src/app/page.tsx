@@ -11,16 +11,25 @@ export default function UploadDocument() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  function detectDoc(filename: string): string {
+    const lower = filename.toLowerCase();
+    if (lower.includes("medical")) return "medical";
+    if (lower.includes("mortgage")) return "mortgage";
+    return "mortgage";
+  }
+
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.files && e.target.files.length > 0) {
-      router.push("/analysis");
+      const doc = detectDoc(e.target.files[0].name);
+      router.push(`/analysis?doc=${doc}`);
     }
   }
 
   function handleDrop(e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      router.push("/analysis");
+      const doc = detectDoc(e.dataTransfer.files[0].name);
+      router.push(`/analysis?doc=${doc}`);
     }
   }
 
