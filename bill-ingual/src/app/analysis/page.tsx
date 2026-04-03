@@ -79,7 +79,7 @@ function AnalysisInProgressInner() {
     }, 50);
 
     return () => clearInterval(interval);
-  }, [router]);
+  }, [router, doc]);
 
   const progressPct = Math.round(progress * 100);
 

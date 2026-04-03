@@ -233,7 +233,7 @@ function AnalysisResultsInner() {
 
               <div className="mt-16 pt-16 border-t border-black/5">
                 <button
-                  onClick={() => router.push("/")}
+                  onClick={() => router.push("/upload")}
                   className="group flex items-center justify-between w-full p-6 bg-surface-container hover:bg-surface-container-high transition-colors"
                 >
                   <span className="font-sans text-[10px] font-bold uppercase tracking-[0.3em]">

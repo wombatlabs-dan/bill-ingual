@@ -19,7 +19,7 @@ export default function Navbar({ activeLink }: NavbarProps) {
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link
-              href="/analysis"
+              href="/upload"
               className={`text-[10px] uppercase tracking-widest transition-colors border-b-2 pb-1 ${
                 activeLink === "analysis"
                   ? "text-[#000000] dark:text-[#f9f9f9] border-[#000000] dark:border-[#f9f9f9]"

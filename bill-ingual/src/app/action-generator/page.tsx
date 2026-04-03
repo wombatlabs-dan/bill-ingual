@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MaterialSymbol from "@/components/MaterialSymbol";
@@ -46,6 +47,13 @@ Account #MED-2026-00341 | Insurance ID: BCBS-TX-4421839`;
       <main className="pt-24 min-h-screen">
         <div className="max-w-[1600px] mx-auto px-8 py-12">
           <div className="mb-16">
+            <Link
+              href="/analysis/results?doc=medical"
+              className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant hover:text-primary transition-colors mb-8"
+            >
+              <MaterialSymbol icon="arrow_back" className="text-sm" />
+              Back to Results
+            </Link>
             <h1 className="serif text-5xl md:text-7xl font-light tracking-tight text-primary mb-4 italic">
               Resolution Blueprint
             </h1>
