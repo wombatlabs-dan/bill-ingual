@@ -1,0 +1,87 @@
+<h2>How should the results display?</h2>
+<p class="subtitle">Both options use the clean navy/white style. This is about how the three sections are arranged.</p>
+
+<div class="split">
+
+  <div class="mockup" data-choice="stack" onclick="toggleSelect(this)" style="cursor:pointer">
+    <div class="mockup-header">A — Vertical Stack</div>
+    <div class="mockup-body" style="background:#f8fafc;padding:16px;font-family:sans-serif">
+
+      <!-- Nav -->
+      <div style="background:#0f172a;color:#fff;padding:8px 14px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:2px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+        <span>BILL-INGUAL</span>
+        <span style="opacity:0.5;font-size:9px">Mortgage Statement</span>
+      </div>
+
+      <!-- Section 1 -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:12px;margin-bottom:8px">
+        <div style="font-size:9px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:8px">WHAT THIS SAYS</div>
+        <div style="font-size:10px;color:#334155;line-height:1.6;margin-bottom:6px">Your monthly payment increased from <strong>$1,422</strong> to <strong>$1,609</strong>.</div>
+        <div style="background:#f8fafc;border-radius:4px;padding:8px">
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#475569;padding:2px 0;border-bottom:1px solid #e2e8f0">
+            <span>Principal & Interest</span><span style="font-weight:600">$1,187</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#dc2626;padding:2px 0;font-weight:600">
+            <span>Escrow (↑ $187)</span><span>$422</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;margin-bottom:8px">
+        <div style="font-size:9px;font-weight:700;color:#92400e;letter-spacing:1.5px;margin-bottom:6px">WHY THIS MATTERS</div>
+        <div style="font-size:11px;font-weight:700;color:#0f172a;margin-bottom:4px">You'll pay $2,244 more this year</div>
+        <div style="font-size:9px;color:#78350f;line-height:1.5">Your county reassessed your property tax up 18%. This increase is real and will continue unless you appeal.</div>
+      </div>
+
+      <!-- Section 3 -->
+      <div style="background:#fff;border:2px solid #0f172a;border-radius:8px;padding:12px">
+        <div style="font-size:9px;font-weight:700;color:#64748b;letter-spacing:1.5px;margin-bottom:6px">WHAT TO DO</div>
+        <div style="font-size:10px;font-weight:600;color:#0f172a;margin-bottom:6px">Appeal the tax assessment — deadline in 30 days</div>
+        <div style="background:#0f172a;color:#fff;border-radius:4px;padding:5px 10px;font-size:9px;font-weight:600;display:inline-block">Copy Dispute Letter →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup" data-choice="tabs" onclick="toggleSelect(this)" style="cursor:pointer">
+    <div class="mockup-header">B — Tabbed / Step-through</div>
+    <div class="mockup-body" style="background:#f8fafc;padding:16px;font-family:sans-serif">
+
+      <!-- Nav -->
+      <div style="background:#0f172a;color:#fff;padding:8px 14px;border-radius:6px;font-size:10px;font-weight:700;letter-spacing:2px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center">
+        <span>BILL-INGUAL</span>
+        <span style="opacity:0.5;font-size:9px">Mortgage Statement</span>
+      </div>
+
+      <!-- Tabs -->
+      <div style="display:flex;gap:4px;margin-bottom:10px">
+        <div style="background:#0f172a;color:#fff;border-radius:4px;padding:5px 10px;font-size:9px;font-weight:700">1 · What it says</div>
+        <div style="background:#e2e8f0;color:#64748b;border-radius:4px;padding:5px 10px;font-size:9px;font-weight:600">2 · Why it matters</div>
+        <div style="background:#e2e8f0;color:#64748b;border-radius:4px;padding:5px 10px;font-size:9px;font-weight:600">3 · What to do</div>
+      </div>
+
+      <!-- Active tab content -->
+      <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:14px;min-height:110px">
+        <div style="font-size:10px;color:#334155;line-height:1.6;margin-bottom:8px">Your monthly payment increased from <strong>$1,422</strong> to <strong>$1,609</strong>.</div>
+        <div style="background:#f8fafc;border-radius:4px;padding:8px">
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#475569;padding:2px 0;border-bottom:1px solid #e2e8f0">
+            <span>Principal & Interest</span><span style="font-weight:600">$1,187</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:9px;color:#dc2626;padding:2px 0;font-weight:600">
+            <span>Escrow (↑ $187/mo)</span><span>$422</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav buttons -->
+      <div style="display:flex;justify-content:flex-end;margin-top:8px">
+        <div style="background:#0f172a;color:#fff;border-radius:4px;padding:5px 12px;font-size:9px;font-weight:700">Next: Why it matters →</div>
+      </div>
+
+      <div style="text-align:center;margin-top:10px;font-size:9px;color:#94a3b8">One section at a time — less overwhelming</div>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px">A shows everything at once — great for scanning. B walks through it step-by-step — less overwhelming but hides the full picture.</p>

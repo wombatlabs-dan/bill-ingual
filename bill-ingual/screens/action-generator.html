@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Action Generator | Bill-ingual</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#777777",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary-fixed-variant": "#e2e2e2",
+                        "tertiary-fixed": "#5e5e5e",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#eeeeee",
+                        "on-primary": "#e2e2e2",
+                        "primary-fixed": "#5e5e5e",
+                        "primary-fixed-dim": "#474747",
+                        "tertiary-container": "#747474",
+                        "surface-dim": "#dadada",
+                        "background": "#f9f9f9",
+                        "surface-container-low": "#f3f3f4",
+                        "tertiary-fixed-dim": "#474747",
+                        "secondary-container": "#d6d4d3",
+                        "outline-variant": "#c6c6c6",
+                        "on-primary-fixed-variant": "#e2e2e2",
+                        "on-error-container": "#410002",
+                        "on-surface-variant": "#474747",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-tertiary-fixed": "#ffffff",
+                        "tertiary": "#3b3b3b",
+                        "surface-container-high": "#e8e8e8",
+                        "inverse-primary": "#c6c6c6",
+                        "surface-bright": "#f9f9f9",
+                        "on-tertiary-container": "#ffffff",
+                        "secondary": "#5f5e5e",
+                        "secondary-fixed": "#c8c6c6",
+                        "secondary-fixed-dim": "#acabab",
+                        "on-primary-container": "#ffffff",
+                        "surface-tint": "#5e5e5e",
+                        "on-tertiary": "#e2e2e2",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#2f3131",
+                        "surface-variant": "#e2e2e2",
+                        "primary": "#000000",
+                        "on-primary-fixed": "#ffffff",
+                        "primary-container": "#3b3b3b",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-surface": "#1a1c1c",
+                        "on-secondary-container": "#1b1c1c",
+                        "on-secondary-fixed-variant": "#3b3b3b",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#f9f9f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "label": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+            color: #1a1c1c;
+        }
+        .serif-text {
+            font-family: 'Newsreader', serif;
+        }
+        textarea:focus {
+            outline: none;
+            border-bottom: 2px solid #000000 !important;
+        }
+    </style>
+</head>
+<body class="bg-surface selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-4 bg-neutral-50/80 dark:bg-neutral-900/80 backdrop-blur-md border-b border-black/10 dark:border-white/10">
+<div class="text-xl font-bold tracking-tighter text-black dark:text-white font-serif italic">Bill-ingual</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-black dark:text-white border-b-2 border-black dark:border-white pb-1 font-bold font-sans text-[10px] uppercase tracking-widest" href="#">Analysis</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors font-sans text-[10px] uppercase tracking-widest" href="#">History</a>
+<a class="text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors font-sans text-[10px] uppercase tracking-widest" href="#">Archives</a>
+</nav>
+<button class="bg-primary text-on-primary px-6 py-2 text-[10px] font-bold tracking-widest uppercase hover:bg-primary-container transition-all active:scale-95 duration-200 ease-in-out">
+            NEW SCAN
+        </button>
+</header>
+<main class="pt-24 min-h-screen">
+<div class="max-w-[1600px] mx-auto px-8 py-12">
+<!-- Page Header -->
+<div class="mb-16">
+<h1 class="serif-text text-5xl md:text-7xl font-light tracking-tight text-primary mb-4 italic">Action Generator</h1>
+<div class="flex items-center gap-4">
+<span class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">Resolution Strategy</span>
+<div class="h-px w-24 bg-primary/10"></div>
+<span class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary">Case #2488-DXL</span>
+</div>
+</div>
+<!-- Split View Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-black/10">
+<!-- Left: Original Document -->
+<div class="bg-surface-container-low p-8 md:p-12 border-r border-black/10 flex flex-col">
+<div class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="text-[10px] font-bold tracking-[0.2em] uppercase mb-2">Original Document</h2>
+<p class="serif-text text-2xl italic">Reference: Mortgage Statement</p>
+</div>
+<span class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">Page 1 of 1</span>
+</div>
+<div class="bg-white p-8 md:p-12 shadow-sm border border-black/5 flex-grow min-h-[600px] relative overflow-hidden">
+<!-- Decorative Document Content -->
+<div class="space-y-6 opacity-80">
+<div class="flex justify-between items-start border-b border-black/10 pb-6">
+<div class="font-bold text-lg">HOMEBRIDGE MORTGAGE SERVICES</div>
+<div class="text-right text-xs">
+<p>Statement Date: March 1, 2026</p>
+<p>Loan #: 0087-4421-9903</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Escrow Account Analysis</div>
+<div class="flex justify-between text-sm py-2 border-b border-black/5">
+<span>Property Taxes (Travis County)</span>
+<span class="font-bold">$7,062.30/yr</span>
+</div>
+<div class="flex justify-between text-sm py-2 border-b border-black/5">
+<span>Homeowner's Insurance</span>
+<span class="font-bold">$1,608.00/yr</span>
+</div>
+<div class="flex justify-between text-sm py-2 border-b border-black/5">
+<span>FHA Mortgage Insurance (MIP)</span>
+<span class="font-bold">$138.50/mo</span>
+</div>
+</div>
+<div class="mt-12 p-4 bg-primary/5 border border-primary/10">
+<p class="text-[10px] font-bold tracking-widest uppercase mb-2 text-primary">System Flagged Issue</p>
+<p class="text-xs italic serif-text leading-relaxed">"Travis County raised assessed value 18% ($285,000 → $336,300), creating a $1,099.86 escrow shortage. Protest deadline: May 15, 2026."</p>
+</div>
+</div>
+<!-- Image Overlay for 'Paper' Texture -->
+<div class="absolute inset-0 pointer-events-none opacity-5 mix-blend-multiply">
+<img alt="subtle premium paper texture with fine grain and organic fibers" class="w-full h-full object-cover" data-alt="subtle premium paper texture with fine grain and organic fibers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs6v8C04PlRaCLQ18B51kfcb0G_ZvaVaV8z4Cej_t5qiLAo2ufVRp4ocVzQtro9rD8-sQfJZO9FYUsdDPMeoUeeWavOI-El4JyJaonc-6Gu9prGd1Ll4iZrnNW1QY_7kPyQ2qT0_5ukOuVJYZprlYMiM0mnEPnqyzTu0Kbdo4udRI92R0OFCxeJGZsnRUyrpmpArITMuimE9OKoGe-FadH3k2R-cftfYHEdpCyf1c4zBuAxcGr2kQd17PiadYkTgCsbNBVkAPpLP0"/>
+</div>
+</div>
+</div>
+<!-- Right: Action Generator -->
+<div class="bg-white p-8 md:p-12 flex flex-col">
+<div class="mb-8 flex justify-between items-end">
+<div>
+<h2 class="text-[10px] font-bold tracking-[0.2em] uppercase mb-2">Generated Output</h2>
+<div class="flex gap-4">
+<button class="serif-text text-2xl italic border-b-2 border-primary">Dispute Letter</button>
+<button class="serif-text text-2xl italic text-on-surface-variant hover:text-primary transition-colors">Phone Script</button>
+</div>
+</div>
+</div>
+<div class="flex-grow flex flex-col">
+<div class="mb-4 flex items-center justify-between">
+<span class="text-[10px] font-bold tracking-widest text-on-surface-variant uppercase">Interactive Editor</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">edit_note</span>
+</div>
+<textarea class="w-full flex-grow p-0 border-0 border-b border-black/10 bg-transparent text-sm leading-relaxed serif-text resize-none focus:ring-0 mb-8" spellcheck="false">To: Travis County Appraisal District
+Date: April 3, 2026
+Re: Property Tax Protest — 1847 Oakridge Drive, Austin, TX 78745
+
+Dear Appraisal Review Board,
+
+I am formally protesting the 2026 assessed value of $336,300 assigned to the above property under Account [YOUR ACCOUNT NUMBER]. The assessed value represents an 18% increase over the prior year's value of $285,000.
+
+I believe this assessment is excessive for the following reasons:
+
+1. The property was purchased on March 15, 2025 for $285,000, establishing an arms-length market value. A one-year appreciation of 18% is inconsistent with median appreciation rates in the 78745 zip code.
+
+2. Comparable properties (comps) in Oakridge and adjacent neighborhoods indicate current market values in the $290,000–$310,000 range. I am prepared to submit supporting comp data at the hearing.
+
+3. The inflated assessment directly caused a $1,099.86 escrow shortage and a $186.72/month increase to our mortgage payment beginning April 2026.
+
+I respectfully request the assessed value be reduced to reflect a fair market valuation. Please confirm the protest hearing date at your earliest convenience. The protest deadline is May 15, 2026.
+
+Sincerely,
+Sarah Chen & Michael Chen
+Loan #0087-4421-9903
+</textarea>
+<div class="grid grid-cols-2 gap-4">
+<button class="bg-primary text-on-primary py-4 px-6 text-[10px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+                                COPY TO CLIPBOARD
+                            </button>
+<button class="border border-primary text-primary py-4 px-6 text-[10px] font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+                                DOWNLOAD PDF
+                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Insights Section (Asymmetric Layout) -->
+<div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="col-span-1 border-t border-black pt-8">
+<h3 class="text-[10px] font-bold tracking-[0.2em] uppercase mb-6">Expert Insight</h3>
+<p class="serif-text text-lg italic leading-tight mb-4">"The strongest lever here is the tax protest. A successful appeal rolls back your escrow requirement and locks in a lower payment permanently."</p>
+<div class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">— AI Financial Architect</div>
+</div>
+<div class="col-span-1 md:col-span-2 relative group overflow-hidden">
+<img alt="high contrast minimalist architectural view with sharp geometric shadows" class="w-full h-48 object-cover grayscale brightness-90 hover:brightness-100 transition-all duration-700" data-alt="high contrast minimalist architectural view with sharp geometric shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMlU8vBfiCNjU4jbpYPItGIYyr1fXG9q_B1FKjVJ29-kaLj68njIgmY0hh8c-68oU9nuFGmnd9nyf-3KR1V5z_o4C_fCb9kQnWf4DCycio3hhxjP-_3-IPy8sxUnumqJeAP8eAa3dcG_tdAQHCW0BA55cDGqZ9xJvPnnQOQNvYjcjR693nfi75hEO6oOI5alLNpB3uLyKLgMVN6IlVdPuEdGeX9Vc_544bpULYYzRvSxpwNlbhlNnMm83mOfoZEHcYcPnPkKAvsTw"/>
+<div class="absolute inset-0 bg-primary/20 mix-blend-overlay"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<span class="text-[10px] font-bold tracking-widest uppercase">Resolution Rate</span>
+<div class="text-4xl font-serif italic">84.2%</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-neutral-100 dark:bg-neutral-950 border-t border-black/5 dark:border-white/5">
+<div class="font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600">
+            © 2026 BILL-INGUAL. ALL RIGHTS RESERVED.
+        </div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white opacity-80 hover:opacity-100 transition-opacity" href="#">Terms of Service</a>
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white opacity-80 hover:opacity-100 transition-opacity" href="#">Privacy Policy</a>
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white opacity-80 hover:opacity-100 transition-opacity" href="#">Legal Disclaimer</a>
+<a class="font-sans text-[10px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600 hover:text-black dark:hover:text-white opacity-80 hover:opacity-100 transition-opacity underline font-bold" href="#">Contact</a>
+</div>
+</footer>
+</body></html>
