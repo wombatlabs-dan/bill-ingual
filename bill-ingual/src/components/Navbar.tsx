@@ -15,7 +15,7 @@ export default function Navbar({ activeLink }: NavbarProps) {
             href="/"
             className="text-2xl font-sans font-black tracking-tighter text-[#000000] dark:text-[#f9f9f9] uppercase"
           >
-            Bill-ingual
+            Bill - ingual
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link

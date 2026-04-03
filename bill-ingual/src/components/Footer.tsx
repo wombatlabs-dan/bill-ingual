@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-[#f9f9f9] dark:bg-[#1a1c1c] text-[#000000] dark:text-[#f9f9f9] border-t border-[#c6c6c6]/20 py-12 w-full">
       <div className="max-w-screen-2xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="flex flex-col items-center md:items-start gap-4">
-          <span className="font-serif italic text-lg">Bill-ingual</span>
+          <span className="font-serif italic text-lg">Bill - ingual</span>
           <p className="font-sans text-[10px] tracking-widest uppercase text-[#474747] dark:text-[#c6c6c6]">
             © 2024 Bill-ingual. ALL RIGHTS RESERVED.
           </p>
