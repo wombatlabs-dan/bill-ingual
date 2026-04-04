@@ -1,6 +1,6 @@
 # Bill-ingual
 
-See it live at https://bill-ingual.dan-22b.workers.dev/
+https://wombatlabs.ai/bill-ingual
 
 **Your AI Financial Document Translator**
 
