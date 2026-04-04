@@ -1,5 +1,7 @@
 # Bill-ingual
 
+See it live at https://bill-ingual.dan-22b.workers.dev/
+
 **Your AI Financial Document Translator**
 
 Upload any confusing financial document — a mortgage statement, medical bill, insurance EOB, or tax notice — and get a plain-language explanation of what it says, why you should care, and exactly what to do about it.
