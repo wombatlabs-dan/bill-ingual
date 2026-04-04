@@ -1,5 +1,5 @@
 
-# 🧾 BILL-INGUAL
+# 🧾 Bill-lingual
 
 > **AI-powered financial document translator** — see what your bills actually mean before they cost you.
 
