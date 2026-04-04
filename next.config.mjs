@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: '/bill-ingual',
   images: {
     remotePatterns: [
       {
