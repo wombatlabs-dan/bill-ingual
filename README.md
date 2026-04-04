@@ -1,12 +1,12 @@
 
+# 🧾 BILL-INGUAL
 
+> **AI-powered financial document translator** — see what your bills actually mean before they cost you.
 
+**🏆 Hackathon Winner** — [Vibe-coding HACathon | Building AI for Finance](https://luma.com/oeacjgyz?tk=c8twhp), San Francisco · April 3, 2026
 
-# Bill-ingual
+**[→ Try it live at wombatlabs.ai/bill-ingual](https://wombatlabs.ai/bill-ingual)**
 
-🏆 Hackathon Winner — Vibe-coding HACathon | Building AI for Finance, San Francisco · April 3, 2026
-
-→ Try it live at https://wombatlabs.ai/bill-ingual
 
 <img width="585" height="621" alt="Screenshot 2026-04-03 at 6 59 57 PM" src="https://github.com/user-attachments/assets/17382bd1-d908-4269-8b28-73a6e1cf250c" />
 
